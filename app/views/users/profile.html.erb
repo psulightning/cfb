@@ -1,0 +1,13 @@
+<div id="profile_tabs">
+  <ul>
+    <li><a href="#profile"><span>Profile</span></a></li>
+    <li><a href="#journal"><span>Workout Journal</span></a></li>
+  </ul>
+  <div id="profile">
+    <%=render :partial=>"profile"%>
+  </div>
+  <div id="journal">
+    <%=render :partial=>"journal"%>
+  </div>
+</div>
+<%=javascript_tag "$('#profile_tabs').tabs();"%>

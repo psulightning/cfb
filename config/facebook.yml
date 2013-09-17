@@ -1,0 +1,5 @@
+## YAML Template.
+default:
+  app_id: 454609657964653
+  secret_key: fa62c22088f54a1294aba4c58795b614
+---

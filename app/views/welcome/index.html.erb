@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  $(function(){
+    $("#slides").slidesjs({
+      pagination:{
+        active:false
+      },
+      play:{
+        interval:6500,
+        auto:true
+      },
+      navigation:{
+        active:false
+      }
+    });
+  });
+  $(document).ready(function(){
+    //$(".slidesjs-slide").css({width:"auto"});
+  });
+</script>
+
+<div id="container" style="margin: 0 auto;width:700px">
+<div id="slides" style="display:none">
+  <%= image_links @files %>
+</div>
+</div>
+
+

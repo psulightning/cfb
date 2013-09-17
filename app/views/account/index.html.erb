@@ -1,0 +1,27 @@
+<div class="login_box">
+  <div style="margin:0 auto;width:35%">
+    <h2>Login</h2>
+    <%= form_tag login_path, :id=>"login_form",:method=>"post" do %>
+      <p><label for="login">Email Address: </label><%=text_field_tag :login%></p>
+      <p><label for="password">Password:</label><%=password_field_tag :password%></p>
+    <%end%>
+  </div>
+  <div style="width: 90%;margin: 0 auto">
+    <div class="fb-login-button" style="display:inline-block" data-width="50"></div>
+    <div class="login_buttons">
+      <%=button_tag "Login", :type=>:button, :id=>"login_button"%>
+      &nbsp;&nbsp;&nbsp;
+      <%=button_tag "Register", :type=>:button, :id=>"register_button"%>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#login_button").click(function() {
+      $("#login_form").submit();
+    });
+    $("#register_button").click(function() {
+      window.location = "<%= register_path%>";
+    });
+  });
+  </script>

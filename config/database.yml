@@ -1,0 +1,22 @@
+development:
+  adapter: mysql2
+  database: baltbear
+  host: localhost
+  username: rails_app
+  password: 4!)1Apw/3k
+  encoding: utf8
+
+production:
+  adapter: mysql2
+  database: baltbear
+  host: localhost
+  username: rails_app
+  password: 4!)1Apw/3k
+  encoding: utf8
+
+migrate:
+  adapter: mysql2
+  database: baltbear
+  host: localhost
+  username: rails_migrate
+  password: '*bG/3^i8q'

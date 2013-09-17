@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Baltimore Bear Complex</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application"%>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+          return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=454609657964653";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+    <%= nav_bar(:brand=>"#{image_tag 'logo_menu.jpg'}".html_safe, :responsive=>true) do%>
+      <%= menu_group do%>
+        <%= menu_item "Home", root_path %>
+      <%end%>
+      <%= menu_group do%>
+        <%= drop_down "About BBC" do %>
+      <%#= menu_item "What is CrossFit?", root_url %>
+          <%= menu_item "Philosophy", "/about/mission" %>
+          <%= menu_item "Coaches", "/about/coaches" %>
+          <%= menu_item "Location", "/about/location" %>
+        <%end%>
+      <%end%>
+      <%= menu_group do %>
+        <%= drop_down "Exercises/WODs" do %>
+          <%= menu_item "WODs", wod_path %>
+          <%= menu_item "Glossary", "/exercises/glossary" %>
+          <%= menu_item "Demos", "/exercises/demos" %>
+        <%end%>
+      <%end%>
+      <%= menu_group do %>
+        <%= drop_down "Nutrition" do %>
+          <%= menu_item "Paleo Lifestyle", "/nutrition/paleo"%>
+          <%= menu_item "Nutrition Blog", blog_posts_url %>
+        <%end%>
+      <%end%>
+      <%if User.current.admin?%>
+        <%= menu_group do %>
+          <%= menu_item "Admin Panel", root_url %>
+        <%end%>
+      <%end%>
+      <%= menu_group(:pull=>"right") do %>
+        <%if User.current.logged?%>
+          <%= drop_down "#{User.current.first} #{User.current.last}" do%>
+            <%= menu_item "My Account", profile_path %>
+            <%= menu_item "Logout", logout_path %>
+          <%end%>
+        <%else%>
+          <%= menu_item "Login/Register", signin_path %>
+        <%end%>
+      <% end %>
+    <%end%>
+    <div id="content">
+    <%= show_flash_messages %>
+    <%= yield %>
+    </div>
+  </body>
+</html>

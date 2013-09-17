@@ -1,0 +1,138 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require jquery.ui.all
+ *= require_tree .
+ */
+
+html, body {
+    height: 100%;
+}
+
+body{
+    min-width: 600px;
+    overflow-x: auto;
+    overflow-y: auto;
+    background-image: url("bg.gif");
+    background-repeat: repeat;
+}
+#wrapper{
+    position: relative;
+    left: 100px;
+    top: 50px;
+}
+
+#content{
+    min-width:600px;
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #95925b;
+    color: darkgreen;
+    height: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 3%;
+}
+
+.login_box{
+    position:relative;
+    left:20%;
+    top:5%;
+    width:60%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: green;
+    height: 275px;
+}
+.login_buttons{
+    display:inline-block;
+    float: right;
+}
+.flash{
+    border-width: 3px;
+    border-style: solid;
+    margin-bottom:5px;
+    padding-left: 4%;
+}
+.flash.error{
+    background-color: pink;
+    border-color: red;
+    color: red;
+}
+.flash.notice{}
+.flash.warning{}
+
+/***** Tabular forms ******/	
+.tabular p{
+  margin: 0;
+  padding: 3px 0 3px 0;
+  padding-left: 180px; /* width of left column containing the label elements */
+  min-height: 1.8em;	
+  clear:left;
+}
+
+html>body .tabular p {overflow:hidden;}
+	
+.register_form{
+    margin: 0 auto;
+    width: 50%;
+}
+
+.tabular label{	
+  font-weight: bold;
+  float: left;
+  text-align: right;
+  /* width of left column */
+  margin-left: -180px;
+  /* width of labels. Should be smaller than left column to create some right margin */
+  width: 175px;
+}
+	
+.tabular label.floating{	
+  font-weight: normal;
+  margin-left: 0px;
+  text-align: left;
+  width: 270px;
+}
+	
+.tabular label.block{	
+  font-weight: normal;
+  margin-left: 0px !important;
+  text-align: left;
+  float: none;
+  display: block;
+  width: auto;
+}
+	
+.tabular label.inline{	
+  font-weight: normal;
+  float:none;
+  margin-left: 5px !important;
+  width: auto;
+}
+	
+label.no-css {	
+  font-weight: inherit;
+  float:none;
+  text-align:left;
+  margin-left:0px;
+  width:auto;
+}
+
+input[type='submit'], button {
+    background-color: #84955b;
+}
+.splitcontent{overflow:auto}
+.splitcontentleft{float:left; width:49%;}
+.splitcontentright{float:right; width:49%;}
+

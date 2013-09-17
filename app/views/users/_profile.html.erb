@@ -1,0 +1,12 @@
+<h2><%= "#{@user.first} #{@user.last}" %></h2>
+<div class="tabular splitcontent">
+  <div class="splitcontentleft">
+    <p><label>Age:</label><%=@user.age%></p>
+    <p><label>Gender:</label><%=@user.gender.capitalize%></p>
+    <p><label>Email:</label><%=mail_to @user.login%></p>
+  </div>
+  <div class="splitcontentright">
+    <p><label>Joined:</label><%=@user.created_at.to_date%></p>
+    <p><label>Last login:</label><%=@user.last_login.getlocal.strftime("%F %r")%></p>
+  </div>
+</div>
