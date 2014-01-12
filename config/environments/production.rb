@@ -7,6 +7,11 @@ Baltbear::Application.configure do
     :location => '/usr/sbin/sendmail',
     :arguments => "-i"
   }
+  
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[Exception] ",
+    :sender_address => %{"notifier" <notifier@cfbaltimore.com>},
+    :exception_recipients => %w{zach@cfbaltimore.com}
     
   # Settings specified here will take precedence over those in config/application.rb.
 
