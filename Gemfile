@@ -52,6 +52,6 @@ gem 'comfy_gallery', path: "lib/plugins/comfy_gallery"
 gem 'tinymce-rails'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
-gem 'passenger', :git => 'git://github.com/phusion/passenger.git', :branch => 'master'
+gem 'passenger'
 
 gem 'savon'
