@@ -2,7 +2,7 @@
 # and open the template in the editor.
 
 class Mailer < ActionMailer::Base
-  default to: "z.hamman@gmail.com"
+  default to: "staff@cfbaltimore.com"
   
   def contact(mail_hash)
     @msg = mail_hash["msg"]
