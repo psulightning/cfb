@@ -1,0 +1,47 @@
+<h3>Contact Us</h3>
+<div class="form_box">
+  <%= form_tag({}, {:method=>"post", :id=>"email_form", :class=>"tabular"}) do%>
+    <p>
+      <label for="mail_name">Name:</label>
+      <%= text_field_tag :mail_name, @mail[:name],
+        :required=>true, :name=>"mail[name]", :placeholder=>"Your name" %>
+    </p>
+    <p>
+      <label for="mail_address">Email:</label>
+      <%= email_field_tag :mail_address, @mail[:address],
+        :required=>true, :name=>"mail[address]", :placeholder=>"sample@mail.com"  %>
+    </p>
+    <p>
+      <label for="mail_phone">Phone #:</label>
+      <%= phone_field_tag :mail_phone,@mail[:phone], :required=>true,
+        :name=>"mail[phone]", :placeholder=>"410-555-5555", :pattern=>"^[2-9]\\d{2}-[2-9][0|2-9][0|2-9]-\\d{4}$"  %>
+      Format: 410-555-5555
+    </p>
+    <p>
+      <label for="mail_msg">Message:</label>
+      <%= text_area_tag :mail_msg,@mail[:msg], :required=>true,
+        :style=>"width: 85%; height: 100px", :name=>"mail[msg]" %>
+    </p>
+    <span style="margin:0; padding: 3px 0 3px 0; padding-left: 180px; clear:left; display:block">
+      <label style="float: left; text-align: right; margin-left: -180px">Preference:</label>
+      <table>
+        <tr>
+          <td><%= radio_button_tag :mail_pref_1, 1, false, :required=>true, :style=>"margin-top:-5px", :name=>"mail[pref]"%></td>
+          <td><b>Email</b></td>
+          <td style="padding-left: 20px"><%= radio_button_tag :mail_pref_0, 0, false,:style=>"margin-top:-5px", :name=>"mail[pref]"%></td>
+          <td><b>Phone</b></td>
+        </tr>
+      </table>
+    </span>
+    <div style="float: right;padding-right: 3%;">
+      <%=submit_tag "Send"%>
+    </div>
+  <%end%>
+</div>
+<script type="text/javascript">
+  <%if pref=@mail[:pref]%>
+  $(document).ready(function(){
+    $("#mail_pref_<%=pref%>").attr("selected","selected");
+  });
+  <%end%>
+</script>

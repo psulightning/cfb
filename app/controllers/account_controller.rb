@@ -5,13 +5,15 @@ class AccountController < ApplicationController
 
   def login
     user = User.try_to_login(params[:login],params[:password])
-    
     if user.nil?
       flash[:error]="Login failed"
       render :action=>"index"
+    elsif user.locked?
+      flash[:error]="Your account has been locked."
+      render :action=>"index"
     else
-      user.update_attribute(last_login: Time.now)
-      User.current=user
+      user.update_attribute(:last_login, Time.now)
+      self.current_user=user
       redirect_to profile_path
     end
   end
@@ -21,6 +23,8 @@ class AccountController < ApplicationController
   end
 
   def logout
-    User.current=nil
+    self.current_user= nil
+    redirect_to root_url
   end
+  
 end

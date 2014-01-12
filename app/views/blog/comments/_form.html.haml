@@ -1,0 +1,7 @@
+= form_for @comment, :as => :comment, :url => blog_comments_path(@cms_site.path, @blog.path, @post.slug) do |form|
+  
+  = form.hidden_field :author_id, :value=> current_user.id
+  %label New Comment
+  = form.text_area :content
+  
+  = form.submit 'Submit'

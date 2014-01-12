@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Baltimore Bear Complex</title>
+    <title>CrossFit Baltimore</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application"%>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        if (typeof document.createElement('input').checkValidity === 'function' &&
+                Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+          $("form").each(function() {
+            $(this).attr("novalidate", "novalidate");
+          });
+        }
+      });
+    </script>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -17,40 +27,61 @@
         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=454609657964653";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));</script>
-    <%= nav_bar(:brand=>"#{image_tag 'logo_menu.jpg'}".html_safe, :responsive=>true) do%>
+    <div class="header">
+      <div style="text-align: center">
+        <div style="margin: 0 auto; width: 50%; height: 10%">
+          <%=image_tag "logo1.png", :style=>"max-width:100%;max-height:100%"%>
+        </div>
+        <div class="mission"><i>"Creating and inspiring a family of extraordinary human beings by challenging them to 
+            reach new levels of determination and perseverance through physical performance."</i></div>
+      </div>
+    </div>
+    <%= nav_bar(:responsive=>true) do%>
       <%= menu_group do%>
         <%= menu_item "Home", root_path %>
       <%end%>
       <%= menu_group do%>
-        <%= drop_down "About BBC" do %>
-      <%#= menu_item "What is CrossFit?", root_url %>
-          <%= menu_item "Philosophy", "/about/mission" %>
-          <%= menu_item "Coaches", "/about/coaches" %>
-          <%= menu_item "Location", "/about/location" %>
+        <%= drop_down "About CFB" do %>
+          <%= menu_item "Location", "/about" %>
+          <%= menu_item "What is CrossFit?", "/about#crossfit" %>
+          <%= menu_item "Coaches", "/about#coaches" %>
+        <%end%>
+      <%end%>
+      <%= menu_group do%>
+        <%= drop_down "Start Here" do%>
+          <%= menu_item "Get Started", "/start" %>
+          <%= menu_item "Fundamentals", "/start#fundamentals"%>
+          <%= menu_item "Schedule/Fees", "/start#schedule" %>
         <%end%>
       <%end%>
       <%= menu_group do %>
-        <%= drop_down "Exercises/WODs" do %>
-          <%= menu_item "WODs", wod_path %>
-          <%= menu_item "Glossary", "/exercises/glossary" %>
-          <%= menu_item "Demos", "/exercises/demos" %>
+        <%= drop_down "WOD" do %>
+          <%= menu_item "WOD Archive", blog_posts_path("","wod") %>
+          <%= menu_item "Exercise Demos", "/exercises" %>
         <%end%>
       <%end%>
       <%= menu_group do %>
         <%= drop_down "Nutrition" do %>
           <%= menu_item "Paleo Lifestyle", "/nutrition/paleo"%>
-          <%= menu_item "Nutrition Blog", blog_posts_url %>
+          <%= menu_item "Nutrition Blog", blog_posts_path("","nutrition") %>
         <%end%>
       <%end%>
-      <%if User.current.admin?%>
+      <%= menu_group do
+        menu_item "Store", "/store" 
+      end%>
+      <%if current_user.admin?%>
         <%= menu_group do %>
-          <%= menu_item "Admin Panel", root_url %>
+          <%= drop_down "Admin" do %>
+            <%= menu_item "Content Manager" , admin_cms_url %>
+            <%= menu_item "MindBody" %>
+          <%end%>
         <%end%>
       <%end%>
       <%= menu_group(:pull=>"right") do %>
-        <%if User.current.logged?%>
-          <%= drop_down "#{User.current.first} #{User.current.last}" do%>
-            <%= menu_item "My Account", profile_path %>
+        <%= menu_item "Contact Us", "/contact" %>
+        <%if current_user.logged?%>
+          <%= drop_down "#{current_user.first} #{current_user.last}" do%>
+            <%= menu_item "My Profile", profile_path %>
             <%= menu_item "Logout", logout_path %>
           <%end%>
         <%else%>
@@ -58,9 +89,42 @@
         <%end%>
       <% end %>
     <%end%>
-    <div id="content">
-    <%= show_flash_messages %>
-    <%= yield %>
+    <div id="main" class="<%=content_for?(:sidebar) ? '' : 'nosidebar'%>">
+      <div id="content">
+        <%= show_flash_messages %>
+        <%= yield %>
+      </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
     </div>
+    <div class='footer'>
+      <hr style="color:grey ">
+      Address: 7521 Pulaski Hwy, Baltimore, MD 21237 <br/>
+      Phone: 443-841-9467 Email: <a href="mailto:dominic@cfbaltimore.com">dominic@cfbaltimore.com</a>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(".navbar").affix({offset: {top: 200}});
+      });
+      var root = $("html,body");
+      $('ul.dropdown-menu a').click(function() {
+        var hash = this.hash;
+        if (hash !== "") {
+          root.animate({
+            scrollTop: $(hash).offset().top - 80
+          }, 500, function() {
+            window.location.hash = hash;
+          });
+        }
+        else {
+          if (window.location.pathname === this.pathname)
+            root.animate({
+              scrollTop: $("#content").offset().top - 80
+            }, 500);
+        }
+        $(".navbar .container .nav-collapse").collapse('hide');
+      });
+    </script>
   </body>
 </html>

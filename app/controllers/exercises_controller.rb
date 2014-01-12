@@ -16,7 +16,4 @@ class ExercisesController < ApplicationController
 
   def destroy
   end
-  
-  def wod
-  end
 end

@@ -2,21 +2,20 @@ development:
   adapter: mysql2
   database: baltbear
   host: localhost
-  username: rails_app
-  password: 4!)1Apw/3k
-  encoding: utf8
-
+  username: root
+  password: 
+  
 production:
   adapter: mysql2
-  database: baltbear
+  database: cfb
   host: localhost
-  username: rails_app
-  password: 4!)1Apw/3k
+  username: cfb_app
+  password: Bwg74p2*
   encoding: utf8
 
 migrate:
   adapter: mysql2
-  database: baltbear
+  database: cfb
   host: localhost
-  username: rails_migrate
-  password: '*bG/3^i8q'
+  username: cfb_migrate
+  password: e#3O17lw

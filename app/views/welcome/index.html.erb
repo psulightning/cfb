@@ -1,27 +1,59 @@
 <script type="text/javascript">
-  $(function(){
+  $(function() {
     $("#slides").slidesjs({
-      pagination:{
-        active:false
+      pagination: {
+        active: false
       },
-      play:{
-        interval:6500,
-        auto:true
+      play: {
+        interval: 4000,
+        auto: true,
+        effect: "fade"
       },
-      navigation:{
-        active:false
+      navigation: {
+        active: false
+      },
+      effect: {
+        fade: {
+          speed: 1200
+        }
       }
     });
   });
-  $(document).ready(function(){
-    //$(".slidesjs-slide").css({width:"auto"});
-  });
 </script>
 
-<div id="container" style="margin: 0 auto;width:700px">
-<div id="slides" style="display:none">
-  <%= image_links @files %>
+<div class="box">
+  <div id="slides" style="display:none;margin-left:20%">
+    <%= image_links @files %>
+  </div>
 </div>
+
+<%content_for :sidebar do %>
+  <%if @wod%>
+    <div class="wod_box">
+      <div id="workout">Workout 
+      </div>
+      <div id="otd">
+        of the day
+      </div>
+      <div id="wod_post">
+        <%=@wod.title%> <br/>
+        <%=@wod.content.html_safe %>
+      </div>
+    </div>
+  <%end%>
+<div class="cfj">
+  <a href="http://journal.crossfit.com/start.tpl?version=CFJ-white123x63" 
+     target="_blank" 
+     title="CrossFit Journal: The Performance-Based Lifestyle Resource">
+    <img src="http://journal.crossfit.com/templates/images/white-125x63.png" 
+         width="125px" 
+         height="63px" 
+         alt="CrossFit Journal: The Performance-Based Lifestyle Resource" />
+  </a>
 </div>
+<div style="padding-top: 20px;width: 70%;margin: 0 auto">
+<%= link_to image_tag("mindbody-logo.png"), "https://clients.mindbodyonline.com/ASP/home.asp?studioid=92604", :title=>"Link to MindBody"%>
+</div>
+<%end%>
 
 

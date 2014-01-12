@@ -1,0 +1,9 @@
+= render :partial => "post", locals: {post: @post}
+
+%br
+
+.comments
+  - @post.comments.published.each do |comment|
+    = render :partial => 'blog/comments/comment', locals: {comment: comment}
+  %br 
+  = render :partial => 'blog/comments/form'

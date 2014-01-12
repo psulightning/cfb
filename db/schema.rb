@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130831185308) do
+ActiveRecord::Schema.define(version: 20131116180001) do
 
   create_table "blog_comments", force: true do |t|
     t.integer  "post_id",                      null: false
-    t.string   "author",                       null: false
-    t.string   "email",                        null: false
+    t.integer  "author_id",                    null: false
     t.text     "content"
     t.boolean  "is_published", default: false, null: false
     t.datetime "created_at"
@@ -27,11 +26,12 @@ ActiveRecord::Schema.define(version: 20130831185308) do
   add_index "blog_comments", ["post_id", "is_published", "created_at"], name: "index_blog_comments_on_post_published_created", using: :btree
 
   create_table "blog_posts", force: true do |t|
+    t.integer  "blog_id",                                  null: false
     t.string   "title",                                    null: false
     t.string   "slug",                                     null: false
     t.text     "content"
     t.string   "excerpt",      limit: 1024
-    t.string   "author"
+    t.integer  "author_id"
     t.integer  "year",                                     null: false
     t.integer  "month",        limit: 2,                   null: false
     t.boolean  "is_published",              default: true, null: false
@@ -60,6 +60,43 @@ ActiveRecord::Schema.define(version: 20130831185308) do
   add_index "blog_tags", ["name", "taggings_count"], name: "index_blog_tags_on_name_and_taggings_count", unique: true, using: :btree
   add_index "blog_tags", ["taggings_count"], name: "index_blog_tags_on_taggings_count", using: :btree
 
+  create_table "blogs", force: true do |t|
+    t.integer "site_id",                             null: false
+    t.string  "label",                               null: false
+    t.string  "identifier",                          null: false
+    t.string  "app_layout",  default: "application", null: false
+    t.string  "path"
+    t.text    "description"
+  end
+
+  add_index "blogs", ["identifier"], name: "index_blogs_on_identifier", using: :btree
+  add_index "blogs", ["site_id", "path"], name: "index_blogs_on_site_id_and_path", using: :btree
+
+  create_table "carousel_carousels", force: true do |t|
+    t.string   "label",      null: false
+    t.string   "identifier", null: false
+    t.string   "dimensions"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "carousel_carousels", ["identifier"], name: "index_carousel_carousels_on_identifier", using: :btree
+
+  create_table "carousel_slides", force: true do |t|
+    t.integer  "carousel_id",                   null: false
+    t.string   "label",                         null: false
+    t.text     "content"
+    t.string   "url"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.integer  "position",          default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "carousel_slides", ["carousel_id", "position"], name: "index_carousel_slides_on_carousel_id_and_position", using: :btree
+
   create_table "cms_blocks", force: true do |t|
     t.integer  "page_id",                     null: false
     t.string   "identifier",                  null: false
@@ -67,115 +104,6 @@ ActiveRecord::Schema.define(version: 20130831185308) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "cms_blocks", ["page_id", "identifier"], name: "index_cms_blocks_on_page_id_and_identifier", using: :btree
-
-  create_table "cms_categories", force: true do |t|
-    t.integer "site_id",          null: false
-    t.string  "label",            null: false
-    t.string  "categorized_type", null: false
-  end
-
-  add_index "cms_categories", ["site_id", "categorized_type", "label"], name: "index_cms_categories_on_site_id_and_categorized_type_and_label", unique: true, using: :btree
-
-  create_table "cms_categorizations", force: true do |t|
-    t.integer "category_id",      null: false
-    t.string  "categorized_type", null: false
-    t.integer "categorized_id",   null: false
-  end
-
-  add_index "cms_categorizations", ["category_id", "categorized_type", "categorized_id"], name: "index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id", unique: true, using: :btree
-
-  create_table "cms_files", force: true do |t|
-    t.integer  "site_id",                                    null: false
-    t.integer  "block_id"
-    t.string   "label",                                      null: false
-    t.string   "file_file_name",                             null: false
-    t.string   "file_content_type",                          null: false
-    t.integer  "file_file_size",                             null: false
-    t.string   "description",       limit: 2048
-    t.integer  "position",                       default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_files", ["site_id", "block_id"], name: "index_cms_files_on_site_id_and_block_id", using: :btree
-  add_index "cms_files", ["site_id", "file_file_name"], name: "index_cms_files_on_site_id_and_file_file_name", using: :btree
-  add_index "cms_files", ["site_id", "label"], name: "index_cms_files_on_site_id_and_label", using: :btree
-  add_index "cms_files", ["site_id", "position"], name: "index_cms_files_on_site_id_and_position", using: :btree
-
-  create_table "cms_layouts", force: true do |t|
-    t.integer  "site_id",                                     null: false
-    t.integer  "parent_id"
-    t.string   "app_layout"
-    t.string   "label",                                       null: false
-    t.string   "identifier",                                  null: false
-    t.text     "content",    limit: 16777215
-    t.text     "css",        limit: 16777215
-    t.text     "js",         limit: 16777215
-    t.integer  "position",                    default: 0,     null: false
-    t.boolean  "is_shared",                   default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_layouts", ["parent_id", "position"], name: "index_cms_layouts_on_parent_id_and_position", using: :btree
-  add_index "cms_layouts", ["site_id", "identifier"], name: "index_cms_layouts_on_site_id_and_identifier", unique: true, using: :btree
-
-  create_table "cms_pages", force: true do |t|
-    t.integer  "site_id",                                         null: false
-    t.integer  "layout_id"
-    t.integer  "parent_id"
-    t.integer  "target_page_id"
-    t.string   "label",                                           null: false
-    t.string   "slug"
-    t.string   "full_path",                                       null: false
-    t.text     "content",        limit: 16777215
-    t.integer  "position",                        default: 0,     null: false
-    t.integer  "children_count",                  default: 0,     null: false
-    t.boolean  "is_published",                    default: true,  null: false
-    t.boolean  "is_shared",                       default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_pages", ["parent_id", "position"], name: "index_cms_pages_on_parent_id_and_position", using: :btree
-  add_index "cms_pages", ["site_id", "full_path"], name: "index_cms_pages_on_site_id_and_full_path", using: :btree
-
-  create_table "cms_revisions", force: true do |t|
-    t.string   "record_type",                  null: false
-    t.integer  "record_id",                    null: false
-    t.text     "data",        limit: 16777215
-    t.datetime "created_at"
-  end
-
-  add_index "cms_revisions", ["record_type", "record_id", "created_at"], name: "index_cms_revisions_on_rtype_and_rid_and_created_at", using: :btree
-
-  create_table "cms_sites", force: true do |t|
-    t.string  "label",                       null: false
-    t.string  "identifier",                  null: false
-    t.string  "hostname",                    null: false
-    t.string  "path"
-    t.string  "locale",      default: "en",  null: false
-    t.boolean "is_mirrored", default: false, null: false
-  end
-
-  add_index "cms_sites", ["hostname"], name: "index_cms_sites_on_hostname", using: :btree
-  add_index "cms_sites", ["is_mirrored"], name: "index_cms_sites_on_is_mirrored", using: :btree
-
-  create_table "cms_snippets", force: true do |t|
-    t.integer  "site_id",                                     null: false
-    t.string   "label",                                       null: false
-    t.string   "identifier",                                  null: false
-    t.text     "content",    limit: 16777215
-    t.integer  "position",                    default: 0,     null: false
-    t.boolean  "is_shared",                   default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_snippets", ["site_id", "identifier"], name: "index_cms_snippets_on_site_id_and_identifier", unique: true, using: :btree
-  add_index "cms_snippets", ["site_id", "position"], name: "index_cms_snippets_on_site_id_and_position", using: :btree
 
   create_table "exercises", force: true do |t|
     t.string   "name"

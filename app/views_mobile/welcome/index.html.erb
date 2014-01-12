@@ -1,0 +1,27 @@
+<%if @wod%>
+  <div style="text-align: center">
+    <div class="wod_box">
+      <div id="workout">Workout
+      </div>
+      <div id="otd">
+        <div id="ot">of the Day</div>
+      </div>
+      <div id="wod_post">
+        <%= @wod.title %>
+        <br/>
+        <%= simple_format(@wod.content.html_safe) %>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<div id="cfj" style="margin: 0 auto; width: 25%;bottom: 1%;padding-top: 10%">
+  <a href="http://journal.crossfit.com/start.tpl?version=CFJ-white123x63"
+     target="_blank"
+     title="CrossFit Journal: The Performance-Based Lifestyle Resource">
+    <img src="http://journal.crossfit.com/templates/images/white-125x63.png"
+         width="125px"
+         height="63px"
+         alt="CrossFit Journal: The Performance-Based Lifestyle Resource" />
+  </a>
+</div>

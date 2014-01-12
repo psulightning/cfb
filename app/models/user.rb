@@ -2,13 +2,17 @@ require "bcrypt"
 
 class User < ActiveRecord::Base
   
-  STATUS_ANON = 0
-  STATUS_MEMBER = 1
-  STATUS_COACH = 2
-  STATUS_ADMIN = 3
-  STATUS_LOCKED = 4
+  has_many :posts, class_name: "Blog::Post", foreign_key: "author_id"
+  has_many :comments, class_name: "Blog::Comment", foreign_key: "author_id"
   
-  before_save :change_password
+  STATUS_ANON = 0
+  STATUS_LOCKED = 1
+  STATUS_MEMBER = 2
+  STATUS_COACH = 3
+  STATUS_ADMIN = 4
+  
+  #before_save :change_password
+  before_create :salt_password
   
   validates :password, :confirmation=>true, :presence=>true
   validates :login, :uniqueness=>true, :presence=>true
@@ -25,17 +29,8 @@ class User < ActiveRecord::Base
     end
   end
   
-  
-  def self.current=(user)
-    Thread.current[:current_user] = user	
-  end
-  
-  def self.current	
-    Thread.current[:current_user] ||= User.new
-  end
-  
   def to_s
-    "#{first} #{last} (#{login})"
+    "#{first} #{last}"
   end
   
   def admin?
@@ -50,13 +45,17 @@ class User < ActiveRecord::Base
     !anon?
   end
   
+  def locked?
+    permission==STATUS_LOCKED
+  end
+  
   def match_password?(clear_password)
     BCrypt::Engine.hash_secret(clear_password, self.salt) == self.password
   end
   
-  def salt_password(clear_password)
+  def salt_password
     self.salt = BCrypt::Engine.generate_salt
-    self.password = BCrypt::Engine.hash_secret(clear_password, self.salt)
+    self.password = BCrypt::Engine.hash_secret(password, self.salt)
   end
   
   def self.try_to_login(name, password)

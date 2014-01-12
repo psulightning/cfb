@@ -1,11 +1,16 @@
 class UsersController < ApplicationController
-  before_filter :logged
+  before_filter :logged, :except=>[:register]
   before_filter :find_model_object, :except=>[:register,:profile]
   
   def edit
   end
 
   def update
+    @user.assign_attributes(user_params)
+    @user.permission = params[:user][:permission] if params[:user][:permission]
+    unless @user.match_password?(params[:user][:password])
+      @user.password,@user.password_confirmation=params[:user][:password],params[:user][:confirm]
+    end
   end
   
   def show
@@ -21,7 +26,9 @@ class UsersController < ApplicationController
       @user.permission=User::STATUS_MEMBER
       @user.password,@user.password_confirmation=params[:user][:password],params[:user][:confirm]
       if @user.save
-        User.current = @user
+        self.current_user = @user
+        @user.update_column(:last_login, Time.now)
+        @user.update_column(:updated_at, Time.now)
         redirect_to profile_path
       else
         flash[:error]=@user.errors.full_messages.join("<br/>").html_safe
@@ -30,7 +37,7 @@ class UsersController < ApplicationController
   end
   
   def profile
-    @user = User.current
+    @user = current_user
   end
   
   private

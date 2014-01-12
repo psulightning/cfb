@@ -7,5 +7,6 @@ class WelcomeController < ApplicationController
   
   def index
     @files = Cms::File.includes(:categories).for_category("front")
+    @wod = Blog::Blog.where(identifier: "wod").first.posts.first
   end
 end

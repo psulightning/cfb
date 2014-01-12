@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:day_and_time]="%Y-%m-%d %H:%M:%S"

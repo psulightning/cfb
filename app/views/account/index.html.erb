@@ -7,7 +7,7 @@
     <%end%>
   </div>
   <div style="width: 90%;margin: 0 auto">
-    <div class="fb-login-button" style="display:inline-block" data-width="50"></div>
+    <!--<div class="fb-login-button" style="display:inline-block" data-width="50"></div>-->
     <div class="login_buttons">
       <%=button_tag "Login", :type=>:button, :id=>"login_button"%>
       &nbsp;&nbsp;&nbsp;
@@ -22,6 +22,11 @@
     });
     $("#register_button").click(function() {
       window.location = "<%= register_path%>";
+    });
+    $("#password").keypress(function(e){
+      if(e.keyCode===13){
+        $("#login_form").submit();
+      }
     });
   });
   </script>
