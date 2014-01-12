@@ -8,11 +8,11 @@ Baltbear::Application.configure do
     :arguments => "-i"
   }
   
-  config.middleware.use ExceptionNotifier,
-    :email_prefix => "[Exception] ",
+  config.middleware.use ExceptionNotification::Rack,
+    :email=>{  :email_prefix => "[Exception] ",
     :sender_address => %{"notifier" <notifier@cfbaltimore.com>},
     :exception_recipients => %w{zach@cfbaltimore.com}
-    
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
