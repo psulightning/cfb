@@ -247,12 +247,20 @@ and (min-width: 481px){
         width: 100%;
         height: auto;
     }
+    #dom_img{
+        float:right;
+    }
+    #tony_img{
+        float:left;
+    }
+    #tony_list{
+        margin-left: 350px;
+    }
 }
 
 @media only screen 
 and (max-device-width : 480px) {
     /* Styles */
-
     .wod_box{
         display:inline-block;
         color: black;
