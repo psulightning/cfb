@@ -36,7 +36,6 @@ end
 
 group :development do
   gem 'byebug', '~> 2.1.1'
-  gem 'seed_dump'
 end
 
 gem 'twitter-bootstrap-rails'
@@ -52,6 +51,6 @@ gem 'comfy_gallery', path: "lib/plugins/comfy_gallery"
 gem 'tinymce-rails'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
-gem 'passenger'
 
 gem 'savon'
+gem 'squeel'
