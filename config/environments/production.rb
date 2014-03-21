@@ -11,7 +11,7 @@ Baltbear::Application.configure do
   config.middleware.use ExceptionNotification::Rack,
     :email=>{  :email_prefix => "[Exception] ",
     :sender_address => %{"notifier" <notifier@cfbaltimore.com>},
-    :exception_recipients => %w{zach@cfbaltimore.com}
+    :exception_recipients => %w{web@cfbaltimore.com}
   }
   # Settings specified here will take precedence over those in config/application.rb.
 
