@@ -27,4 +27,41 @@ class AccountController < ApplicationController
     redirect_to root_url
   end
   
+  def checkin
+    if request.get?
+      render :layout=>nil
+      return
+    end
+    @errors = nil
+    begin
+      if params[:ident]
+        service = ClassService.new
+        response = service.get_classes({"SchedulingWindow"=>true})
+        if (status = response.xpath("//Status").text)!="Success"
+          @errors = [status, response.xpath("//Message").text]
+        elsif response.xpath("//Classes").children.length==0
+          @errors = ["There are no classes available."]
+        else
+          class_id = response.xpath("//Classes/Class[1]/ID").text.to_i
+          response = service.add_clients_to_classes({"Test"=>true,
+              "ClientIDs"=>{"string"=>params[:ident]},
+              "ClassesID"=>{"int"=>class_id}})
+          if (status=response.xpath("//Status").text)!="Success"
+            @errors = [status, response.xpath("//Message").text]
+          else
+            first = response.xpath("//Client/FirstName").text
+            last = response.xpath("//Client/LastName").text
+            @success = "Check In Successful for #{first} #{last}"
+          end
+        end
+      else
+        @errors = ["No ID entered."]
+      end
+    rescue Savon::SOAPFault => f
+      @errors = ["A problem occurred!"]
+      ExceptionNotifier.notify_exception(f,:env=>env)
+    end
+    render :layout=>nil
+  end
+  
 end

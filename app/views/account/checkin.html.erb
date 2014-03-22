@@ -1,0 +1,42 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CrossFit Baltimore - Check In Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%= javascript_include_tag "application"%>
+    <%= stylesheet_link_tag "application" %>
+    <script type="text/javascript">
+      $("#ident").on("keypress", function(e) {
+        if (e.which === 13) {
+          $("#flash").hide();
+          $("#flash").removeClass();
+          $('#checkin_form').submit();
+          e.preventDefault();
+        }
+      });
+    </script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="header">
+      <div style="text-align: center">
+        <div style="margin: 0 auto; width: 50%; height: 10%">
+          <%=image_tag "logo1.png", style:"max-width:100%;max-height:100%"%>
+        </div>
+      </div>
+    </div>
+      <div style="text-align:center">
+        <div id="flash" style="display:none;margin: 0 auto;width:30%"></div>
+        <div>
+          <b style="color: whitesmoke">Check In using your Phone Number</b>
+          <%=form_tag "checkin", :remote=>true do%>
+            <%=text_field_tag "ident"%>
+          <%end%>
+        </div>
+      </div>
+  </body>
+</html>

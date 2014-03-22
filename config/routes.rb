@@ -15,6 +15,7 @@ Baltbear::Application.routes.draw do
   post "login", :to=>"account#login", :as=>:login
   
   get "logout", :to=>"account#logout", :as=>:logout
+  match "checkin", :to=>"account#checkin", :via=>[:post,:get]
   
   ComfyGallery::Routing.admin
   comfy_route :blog_admin, :path => '/cms-admin'

@@ -78,7 +78,7 @@ and (max-width: 480px){
         padding: 0px 0px;
     }
     .dropdown-backdrop {
-  position: static;
-}
+        position: static;
+    }
 }
 

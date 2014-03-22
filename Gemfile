@@ -48,6 +48,7 @@ gem 'koala'
 gem 'comfortable_mexican_sofa'
 gem 'comfy_blog', path: "lib/plugins/comfy_blog"
 gem 'comfy_gallery', path: "lib/plugins/comfy_gallery"
+gem 'mindbody', path: "lib/plugins/mindbody"
 gem 'tinymce-rails'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
