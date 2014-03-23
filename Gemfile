@@ -55,3 +55,4 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 
 gem 'savon'
 gem 'squeel'
+gem 'mindbody-api'
