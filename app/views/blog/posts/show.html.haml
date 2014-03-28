@@ -8,3 +8,5 @@
   %br 
   - if current_user.logged?
     = render :partial => 'blog/comments/form'
+  - else
+    ="You must be #{link_to("logged in",signin_url)} to comment.".html_safe
