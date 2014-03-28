@@ -6,4 +6,5 @@
   - @post.comments.published.each do |comment|
     = render :partial => 'blog/comments/comment', locals: {comment: comment}
   %br 
-  = render :partial => 'blog/comments/form'
+  - if current_user.logged?
+    = render :partial => 'blog/comments/form'
