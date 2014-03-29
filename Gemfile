@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
@@ -48,11 +48,10 @@ gem 'koala'
 gem 'comfortable_mexican_sofa'
 gem 'comfy_blog', path: "lib/plugins/comfy_blog"
 gem 'comfy_gallery', path: "lib/plugins/comfy_gallery"
-gem 'mindbody', path: "lib/plugins/mindbody"
 gem 'tinymce-rails'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
 
 gem 'savon'
 gem 'squeel'
-gem 'mindbody-api'
+gem 'mindbody-api', path: 'lib/plugins/mindbody-api'

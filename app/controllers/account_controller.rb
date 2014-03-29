@@ -35,23 +35,24 @@ class AccountController < ApplicationController
     @errors = nil
     begin
       if params[:ident]
-        service = ClassService.new
-        response = service.get_classes({"SchedulingWindow"=>true})
-        if (status = response.xpath("//Status").text)!="Success"
-          @errors = [status, response.xpath("//Message").text]
-        elsif response.xpath("//Classes").children.length==0
+        service = MindBody::Services::ClassService.new
+        response = service.get_classes({"StartDateTime"=>Date.today,"EndDateTime"=>Date.today})
+        results = response.result
+        if (status = response.status)!="Success"
+          @errors = [status, response.message]
+        elsif results[:classes].nil?
           @errors = ["There are no classes available."]
         else
-          class_id = response.xpath("//Classes/Class[1]/ID").text.to_i
-          response = service.add_clients_to_classes({"Test"=>true,
+          class_obj = results[:classes].is_a?(Array) ? results[:classes].first : results[:classes]
+          response = service.add_clients_to_classes("Test"=>true,
               "ClientIDs"=>{"string"=>params[:ident]},
-              "ClassesID"=>{"int"=>class_id}})
-          if (status=response.xpath("//Status").text)!="Success"
-            @errors = [status, response.xpath("//Message").text]
+              "ClassesID"=>{"int"=>class_obj[:id]})
+          if (status=response.status)!="Success"
+            @errors = [status, response.message]
           else
             first = response.xpath("//Client/FirstName").text
             last = response.xpath("//Client/LastName").text
-            @success = "Check In Successful for #{first} #{last}"
+            @success = "Check In Successful for #{first} #{last} into #{class_obj[:name]} at #{class_obj[:start_date_time]}"
           end
         end
       else
