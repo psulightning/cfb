@@ -1,4 +1,4 @@
 <div class='comment' id='<%= dom_id(comment) %>'>
+  <%= "#{author_link(comment)}".html_safe%> <span style="color:#275937;font-size: 13px"><%= "#{l(comment.created_at)}" %></span>
   <div class="comment_content"><%= comment.content %></div>
-  <%= "#{author_link(comment)} #{l(comment.created_at)}".html_safe %> 
 </div>
