@@ -1,1 +1,9 @@
 /* Overwrite this file in your application /app/assets/stylesheets/comfortable_mexican_sofa/admin/application.css */
+.comment{
+    padding-bottom: 18px
+}
+
+.comment_content{
+    padding-top: 2px;
+    margin-left: 20px;
+}
