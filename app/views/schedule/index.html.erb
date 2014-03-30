@@ -4,9 +4,8 @@
     <%=javascript_include_tag "dhtmlxscheduler"%>
     <%=javascript_include_tag "dhtmlxscheduler_readonly"%>
     <%=javascript_include_tag "dhtmlxscheduler_tooltip"%>
-    <%=javascript_include_tag "jquery"%>
+    <%=javascript_include_tag "dhtmlxscheduler_container_autoresize"%>
     <%=javascript_include_tag "date_ext"%>
-    <%= csrf_meta_tags %>
     <style type="text/css" media="screen">
       html, body{
         margin:0px;
@@ -16,6 +15,13 @@
       }   
       .event_display{
         color: white;
+        height: 20px;
+      }
+      .dhtmlXTooltip.tooltip{
+        opacity: 1
+      }
+      div.dhx_event_move.dhx_title{
+        height: 16px;
       }
     </style>
     <script type="text/javascript">
@@ -70,7 +76,5 @@
       <div class="dhx_cal_header"></div>
       <div class="dhx_cal_data"></div>       
     </div>
-    <div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>	
-    <div id="ajax-modal" style="display:none;"></div>
   </body>
 </html>

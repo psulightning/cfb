@@ -5,6 +5,7 @@
     <%=javascript_include_tag "date_ext"%>
     <%=javascript_include_tag "jquery" %>
     <%= csrf_meta_tags %>
+
     <script type="text/javascript">
       var curr_date = new Date();
       scheduler.config.init_date = curr_date;
@@ -55,16 +56,18 @@
       dhx.ready(function() {
         dhx.ui.fullScreen();
         dhx.ui({
+          container: "schedulerDiv",
           view: "scheduler",
           id: "scheduler"
         });
         $$("scheduler").$$("calendar").define("startOnMonday", false);
         $$("scheduler").load("schedule/events.js", "json");
+        $$("scheduler").$$("month").show();
         $$("scheduler").$$("buttons").setValue("month");
       });
-      $(document).on("click",".dhx_cal_prev_button",loadEvents);
-      $(document).on("click",".dhx_cal_next_button",loadEvents);
-      
+      $(document).on("click", ".dhx_cal_prev_button", loadEvents);
+      $(document).on("click", ".dhx_cal_next_button", loadEvents);
+
       function loadEvents() {
         var load = false;
         var mode = $$("scheduler").$$("buttons").config.selected;
@@ -79,7 +82,7 @@
           diff *= curr_date.getDate();
           var date = curr_date.addDays(diff);
           min = new Date(date.getFullYear(), date.getMonth(), 1);
-          max = new Date(date.getFullYear(), date.getMonth()+1, 1);
+          max = new Date(date.getFullYear(), date.getMonth() + 1, 1);
         }
         curr_date = curr_date.addDays(diff);
 
@@ -98,5 +101,11 @@
     </script>
   </head>
   <body>
+    <div style="text-align: center">
+      <div style="margin: 0 auto; width: 50%; height: 10%">
+        <%=image_tag "logo1.png", :style=>"max-width:100%;max-height:100%"%>
+      </div>
+    </div>
+    <div id="schedulerDiv" style="height:417px;width:320px;"></div>
   </body>
 </html>
