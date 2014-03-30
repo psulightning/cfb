@@ -1,0 +1,10 @@
+<%if @errors%>
+  $("#flash").addClass("alert alert-error");
+  $("#flash").html("<%=@errors.join(", ")%>");
+  $("#flash").show();
+<%end%>
+<%if @success%>
+  $("#flash").addClass("alert alert-success");
+  $("#flash").html("<%=@success%>");
+  $("#flash").show();
+<%end%>

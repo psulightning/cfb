@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <%=stylesheet_link_tag "dhxscheduler_mobile"%>
+    <%=javascript_include_tag "dhxscheduler_mobile"%>
+    <%=javascript_include_tag "date_ext"%>
+    <%=javascript_include_tag "jquery" %>
+    <%= csrf_meta_tags %>
+    <script type="text/javascript">
+      var curr_date = new Date();
+      scheduler.config.init_date = curr_date;
+      scheduler.config.xml_date = "%m/%d/%Y %g:%i %A";
+      scheduler.config.item_date = "%m/%d/%Y";
+      scheduler.config.hour_date = "%h:%i %A";
+      scheduler.config.form_date = "%m/%d/%Y %g:%i %A";
+      scheduler.config.header_date = "%m/%d/%Y";
+      scheduler.config.readonly = true;
+      scheduler.templates.selected_event = function(obj) {
+        var html = "", fts = "", fte = "";
+        var start = obj.start_date;
+        var end = obj.end_date;
+
+        if (!start)
+          return html;
+        html += "<div class='selected_event " + scheduler.templates.event_class(obj) + "' style='" + (obj.color ? "background-color:" + obj.color + ";" : "") + (obj.fontColor || obj.textColor ? "color:" + (obj.fontColor || obj.textColor) : "") + "'>";
+        html += "<div class='event_title'>" + obj.text + "</div>";
+
+        if (dhx.Date.datePart(start).valueOf() === dhx.Date.datePart(end).valueOf()) {
+          var fd = dhx.i18n.dateFormatStr(start);
+          fts = dhx.i18n.timeFormatStr(start);
+          fte = dhx.i18n.timeFormatStr(end);
+          html += "<div class='event_text'>" + fd + "</div>";
+          html += "<div class='event_text'> " + fts + " " + scheduler.locale.labels.label_to + " " + fte + "</div>";
+        }
+        else {
+          var fds = dhx.i18n.longDateFormatStr(start);
+          var fde = dhx.i18n.longDateFormatStr(end);
+          /*if not "all-day" event*/
+          if (!(dhx.Date.datePart(start).valueOf() === start.valueOf() && dhx.Date.datePart(end).valueOf() === end.valueOf())) {
+            fts = dhx.i18n.timeFormatStr(start) + " ";
+            fte = dhx.i18n.timeFormatStr(end) + " ";
+          }
+          html += "<div class='event_text'>" + scheduler.locale.labels.label_from + " " + fts + fds + "</div>";
+          html += "<div class='event_text'>" + scheduler.locale.labels.label_to + " " + fte + fde + "</div>";
+        }
+        html += "<div class='event_title'>Staff</div>";
+        html += "<div class='event_text'> " + obj.staff + "</div>";
+        if (obj.details && obj.details !== "") {
+          html += "<div class='event_title'>Description</div>";
+          html += "<div class='event_text'>" + obj.details + "</div>";
+        }
+        html += "</div>";
+        return html;
+      };
+
+      dhx.ready(function() {
+        dhx.ui.fullScreen();
+        dhx.ui({
+          view: "scheduler",
+          id: "scheduler"
+        });
+        $$("scheduler").$$("calendar").define("startOnMonday", false);
+        $$("scheduler").load("schedule/events.js", "json");
+        $$("scheduler").$$("buttons").setValue("month");
+      });
+      $(document).on("click",".dhx_cal_prev_button",loadEvents);
+      $(document).on("click",".dhx_cal_next_button",loadEvents);
+      
+      function loadEvents() {
+        var load = false;
+        var mode = $$("scheduler").$$("buttons").config.selected;
+        var diff = $(this).hasClass("dhx_cal_prev_button") ? -1 : 1;
+        var min, max;
+        if (mode === "day") {
+          diff *= 1;
+          min = curr_date.addDays(diff);
+          max = diff < 0 ? curr_date : curr_date.addDays(diff + 1);
+        }
+        else if (mode === "month") {
+          diff *= curr_date.getDate();
+          var date = curr_date.addDays(diff);
+          min = new Date(date.getFullYear(), date.getMonth(), 1);
+          max = new Date(date.getFullYear(), date.getMonth()+1, 1);
+        }
+        curr_date = curr_date.addDays(diff);
+
+        var date = min;
+        while (date <= max) {
+          if ($$("scheduler").getEvents(date, date.addDays(1)).length === 0) {
+            load = true;
+            break;
+          }
+          date = date.addDays(1);
+        }
+        if (load)
+          $$("scheduler").load("schedule/events.js?min=" + min + "&max=" + max, "json");
+      }
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
