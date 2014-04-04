@@ -10,14 +10,26 @@ and open the template in the editor.
     <%= javascript_include_tag "application"%>
     <%= stylesheet_link_tag "application" %>
     <script type="text/javascript">
-      $("#ident").on("keypress", function(e) {
-        if (e.which === 13) {
-          $("#flash").hide();
-          $("#flash").removeClass();
-          $('#checkin_form').submit();
-          e.preventDefault();
-        }
-      });
+        $(document).on("keypress", "#ident", function(e) {
+          if (e.which === 13) {
+            $("#flash").hide();
+            $("#flash").removeClass();
+            $.ajax("/checkin.js",
+                  {data: {ident: $("#ident").val()},
+                    type: "POST",
+                    beforeSend: function() {
+                      $("#ident").addClass("loading");
+                    }});
+          }
+        });
+        $(document).on("click","button",function(e){
+          $.ajax("/checkin.js",
+          {data: {ident: $("#ident").val(),class_id: this.id},
+            type: "POST",
+          complete:function(){
+            setTimeout(function(){location.reload(1);},4000);
+          }});
+        });
     </script>
     <%= csrf_meta_tags %>
   </head>
@@ -29,14 +41,13 @@ and open the template in the editor.
         </div>
       </div>
     </div>
-      <div style="text-align:center">
-        <div id="flash" style="display:none;margin: 0 auto;width:30%"></div>
-        <div>
-          <b style="color: whitesmoke">Check In using your Phone Number</b>
-          <%=form_tag "checkin", :remote=>true do%>
-            <%=text_field_tag "ident"%>
-          <%end%>
-        </div>
+    <div style="text-align:center;padding-top: 5%">
+      <div>
+        <b style="color: whitesmoke;font-size: 25px">Check In using your Phone Number</b>
+        <div style="padding-top:25px"><%=text_field_tag "ident"%></div>
       </div>
+      <div id="class_div" style="display:none;color:whitesmoke;padding-top:10px;padding-bottom:20px"></div>
+      <div id="flash" style="display:none;margin: 0 auto;width:60%"></div>
+    </div>
   </body>
 </html>
