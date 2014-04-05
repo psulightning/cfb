@@ -40,7 +40,7 @@ class AccountController < ApplicationController
       @service = MindBody::Services::ClassService.new
       if @client && !@class_obj
         time = Time.now
-        
+
         response = @service.get_classes({"StartDateTime"=>Date.today,"EndDateTime"=>Date.today})
         if (response.status)!="Success" || response.result_count == "0"
           @errors = [response.message]
@@ -58,8 +58,8 @@ class AccountController < ApplicationController
           }.sort{|a,b| a.start_date_time<=>b.start_date_time} if classes.is_a?(Array)
           curr_class = @classes.first
           
-          @classes.shift if (curr_class.name != "Open Gym" && !(curr_class.start_date_time + 10.minutes > time)) || 
-            (curr_class.name == "Open Gym" && curr_class.end_date_time < time)
+          @classes.shift if curr_class && ((curr_class.name != "Open Gym" && !(curr_class.start_date_time + 10.minutes > time)) || 
+              (curr_class.name == "Open Gym" && curr_class.end_date_time < time))
           if @classes.empty?
             @classes = nil
             @errors = ["There are no classes available."]

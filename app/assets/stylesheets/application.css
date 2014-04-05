@@ -33,13 +33,13 @@ input[type='submit'], button {
 }
 @font-face {
     font-family: 'Armalite';
-    src: url('armalite_rifle.ttf') format('truetype');
+    src: url('/fonts/armalite_rifle.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Whoa';
-    src: url('whoa.ttf') format('truetype');
+    src: url('/fonts/whoa.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
