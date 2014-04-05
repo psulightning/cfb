@@ -53,6 +53,31 @@ a{
 .post{
     margin-bottom: 40px
 }
+.loading{
+    background-image:url('/assets/loading.gif');
+    background-position: right 10px top 5px;
+    background-repeat: no-repeat;
+}
+
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+#ajax_loading{
+    display: none;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    background-image: url("/assets/loading.gif");
+    background-position: left 10px top 5px;
+    background-repeat: no-repeat;
+    text-align:center;
+    vertical-align: middle;
+    height: 30px;
+    width: 20%;
+    z-index: 5000;
+    background-color: white;
+}
 
 @media only screen
 and (min-width: 481px){
