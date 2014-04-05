@@ -10,7 +10,7 @@ $("#ident").removeClass("loading");
   $("#flash").show();
 <%end%>
 <%if @classes%>
-  $("#class_div").append('<h4>Welcome back, <%=@client.first_name%> <%=@client.last_name%>!  Select a Class below.r</h4>');
+  $("#class_div").append('<h4>Welcome back, <%=@client.first_name%> <%=@client.last_name%>!  Select a Class below.</h4>');
   <%@classes.each{|c|%>
   $("#class_div").append('<div><%=c.name%> - <%=c.start_date_time.strftime("%l:%M %p")%>  <%=button_tag "Register", :id=>"#{c.id}"%></div>');
   <%}%>

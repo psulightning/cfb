@@ -60,6 +60,10 @@ class AccountController < ApplicationController
           
           @classes.shift if (curr_class.name != "Open Gym" && !(curr_class.start_date_time + 10.minutes > time)) || 
             (curr_class.name == "Open Gym" && curr_class.end_date_time < time)
+          if @classes.empty?
+            @classes = nil
+            @errors = ["There are no classes available."]
+          end
         end
       elsif @client && @class_obj
         register_class
@@ -87,7 +91,7 @@ class AccountController < ApplicationController
       when "603"
         "Already signed into #{@class_obj.start_date_time.strftime("%l:%M %p")}"
       else
-        "#{error_code} - #{response.result[:classes][:clients][:message]}"
+        "#{error_code} - #{[response.message,response.result[:classes][:clients][:message]].join(", ")}"
       end
       @errors =  [msg]
     else
