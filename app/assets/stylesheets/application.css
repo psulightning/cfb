@@ -33,13 +33,21 @@ input[type='submit'], button {
 }
 @font-face {
     font-family: 'Armalite';
-    src: url('/fonts/armalite_rifle.ttf') format('truetype');
+    src: url('/fonts/armalite_rifle.eot');
+    src: url('/fonts/armalite_rifle.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/armalite_rifle.woff') format('woff'),
+        url('/fonts/armalite_rifle.svg#webfont') format('svg'),
+        url('/fonts/armalite_rifle.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Whoa';
-    src: url('/fonts/whoa.ttf') format('truetype');
+    src: url('/fonts/whoa.eot');
+    src: url('/fonts/whoa.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/whoa.woff') format('woff'),
+        url('/fonts/whoa.svg#webfont') format('svg'),
+        url('/fonts/whoa.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -123,7 +131,7 @@ and (min-width: 481px){
         margin: 0 auto;
         width: 50%;
     }
-    
+
     .tabular label{	
         font-weight: bold;
         float: left;

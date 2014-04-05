@@ -13,12 +13,6 @@
           });
         }
       });
-      $(document).on("click", "#schedule_link", function() {
-        if ($("#schedule_dialog").length === 0)
-          $("body").append("<div id='schedule_dialog'></div>");
-        $("#schedule_dialog").load("/schedule");
-        $("#schedule_dialog").dialog({resizable: false, modal: true, height: $(window).height() * .9, width: $(window).width() * .8, show: {effect: "slide", duration: 1000}});
-      });
     </script>
     <meta name="description" 
           content="Crossfit Baltimore - Creating and inspiring a community of extraordinary people 
@@ -137,5 +131,7 @@
         $(".navbar .container .nav-collapse").collapse('hide');
       });
     </script>
+    <div id='schedule_dialog'></div>
+    <div id="ajax_loading">Loading...</div>
   </body>
 </html>
