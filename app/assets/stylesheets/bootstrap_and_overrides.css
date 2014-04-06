@@ -78,6 +78,16 @@ input[type=text]::-ms-clear {
     z-index: 5000;
     background-color: white;
 }
+.class_container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 25%;
+    margin: 0 auto;
+    text-align: left;
+}
+.class_container button{
+    float: right;
+}
 
 @media only screen
 and (min-width: 481px){

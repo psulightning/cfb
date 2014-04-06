@@ -23,6 +23,10 @@ and open the template in the editor.
           }
         });
         $(document).on("click","button",function(e){
+          if(this.id==="cancel_button"){
+            location.reload(1);
+            return;
+          }
           $.ajax("/checkin.js",
           {data: {ident: $("#ident").val(),class_id: this.id},
             type: "POST",

@@ -49,6 +49,7 @@ class AccountController < ApplicationController
         else
           classes = response.result[:classes]
           if classes.is_a?(MindBody::Models::Class)
+            @class_obj = classes
             register_class
             render :layout=>nil
             return
