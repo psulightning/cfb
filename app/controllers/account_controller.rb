@@ -48,14 +48,10 @@ class AccountController < ApplicationController
           @errors = ["There are no classes available."]
         else
           classes = response.result[:classes]
-          if classes.is_a?(MindBody::Models::Class)
-            @classes = [classes] 
-            render :layout=>nil
-            return
-          end
+          classes = [classes] if classes.is_a?(MindBody::Models::Class)
           @classes = classes.select{|c|
             (c.start_date_time <= time && time <=c.end_date_time) || (c.start_date_time > time)
-          }.sort{|a,b| a.start_date_time<=>b.start_date_time} if classes.is_a?(Array)
+          }.sort{|a,b| a.start_date_time<=>b.start_date_time}
           curr_class = @classes.first
           
           @classes.shift if curr_class && ((curr_class.name != "Open Gym" && !(curr_class.start_date_time + 10.minutes > time)) || 
