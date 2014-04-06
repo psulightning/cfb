@@ -80,7 +80,7 @@ input[type=text]::-ms-clear {
 }
 .class_container{
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     width: 25%;
     margin: 0 auto;
     text-align: left;
