@@ -3,7 +3,8 @@ module ApplicationHelper
     msg=""
     if !flash.keys.empty?
       flash.each{|k,v|
-        msg << content_tag(:div,:class=>"alert alert-#{k}") do
+        klass = k==:error ? :danger : k
+        msg << content_tag(:div,:class=>"alert alert-#{klass}") do
           str = "<ul>"  
           str << case v
           when String
