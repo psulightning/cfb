@@ -10,30 +10,38 @@ and open the template in the editor.
     <%= javascript_include_tag "application"%>
     <%= stylesheet_link_tag "application" %>
     <script type="text/javascript">
-        $(document).on("keypress", "#ident", function(e) {
-          if (e.which === 13) {
-            $("#flash").hide();
-            $("#flash").removeClass();
-            $.ajax("/checkin.js",
+      $(document).on("keypress", "#ident", function(e) {
+        if (e.which === 13) {
+          $("#flash").hide();
+          $("#flash").removeClass();
+          $.ajax("/checkin.js",
                   {data: {ident: $("#ident").val()},
                     type: "POST",
                     beforeSend: function() {
                       $("#ident").addClass("loading");
                     }});
-          }
-        });
-        $(document).on("click","button",function(e){
-          if(this.id==="cancel_button"){
-            location.reload(1);
-            return;
-          }
-          $.ajax("/checkin.js",
-          {data: {ident: $("#ident").val(),class_id: this.id},
-            type: "POST",
-          complete:function(){
-            setTimeout(function(){location.reload(1);},4000);
-          }});
-        });
+        }
+      });
+      $(document).on("click", "button", function(e) {
+        if (this.id === "cancel_button") {
+          location.reload(1);
+          return;
+        }
+        $.ajax("/checkin.js",
+                {data: {ident: $("#ident").val(), class_id: this.id},
+                  type: "POST",
+                  complete: function() {
+                    $("#ident").removeClass("loading");
+                  },
+                  success: function() {
+                    setTimeout(function() {
+                      location.reload(1);
+                    }, 4000);
+                  },
+                  beforeSend: function() {
+                    $("#ident").addClass("loading");
+                  }});
+      });
     </script>
     <%= csrf_meta_tags %>
   </head>
@@ -50,8 +58,8 @@ and open the template in the editor.
         <b style="color: whitesmoke;font-size: 25px">Check In using your Phone Number</b>
         <div style="padding-top:25px"><%=text_field_tag "ident"%></div>
       </div>
-      <div id="class_div" style="display:none;color:whitesmoke;padding-top:10px;padding-bottom:25px"></div>
       <div id="flash" style="display:none;margin: 0 auto;width:60%"></div>
+      <div id="class_div" style="display:none;color:whitesmoke;padding-top:10px;padding-bottom:25px"></div>
     </div>
   </body>
 </html>
