@@ -25,6 +25,7 @@
       }
     </style>
     <script type="text/javascript">
+
       $(document).ready(function() {
         scheduler.config.xml_date = "%m/%d/%Y %g:%i %A";
         scheduler.config.start_on_monday = false;
@@ -42,24 +43,10 @@
                   "<br/><b>Start Time: </b>" + format(start) + "<br/><b>End Time: </b> " + format(end);
         };
         scheduler.init('scheduler_here', new Date(), "month");
-        scheduler.load("schedule/events.js?min=" + scheduler._min_date + "&max=" + scheduler._max_date, "json");
+        scheduler.setLoadMode("week");
+        scheduler.load("schedule/events.js", "json");
         scheduler.config.displayed_event_text_color = "white";
-        $(".dhx_cal_prev_button").click(loadEvents);
-        $(".dhx_cal_next_button").click(loadEvents);
       });
-      function loadEvents() {
-        var load = false;
-        var date = scheduler._min_date;
-        while (date <= scheduler._max_date) {
-          if (scheduler.getEvents(date, date.addDays(1)).length === 0) {
-            load = true;
-            break;
-          }
-          date = date.addDays(1);
-        }
-        if (load)
-          scheduler.load("schedule/events.js?min=" + scheduler._min_date + "&max=" + scheduler._max_date, "json");
-      }
     </script>
   </head>
   <body>

@@ -8,13 +8,14 @@ class ScheduleController < ApplicationController
   
   def events
     mindbody
+    render :json => @class_list
   end
   
   private
   def mindbody
     curr_date = Date.today
-    min = params[:min] || Date.new(curr_date.year(),curr_date.month(),1)
-    max = params[:max] || Date.new(curr_date.year(),curr_date.month(),-1)
+    min = params[:from] || Date.new(curr_date.year(),curr_date.month(),1)
+    max = params[:to] || Date.new(curr_date.year(),curr_date.month(),-1)
 
     service = MindBody::Services::ClassService.new
     dates = {"StartDateTime"=>min.to_date,
@@ -47,6 +48,5 @@ class ScheduleController < ApplicationController
       end
       @class_list << hsh
     }
-    render :json => @class_list
   end
 end
