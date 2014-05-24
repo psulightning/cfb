@@ -1,0 +1,5 @@
+%h1 #{@blog.label} Posts
+
+- @posts.each do |post|
+  = render :partial => post
+= paginate @posts, :params=>{:controller=>"comfy/blog/posts",:action=>"serve",:blog_path=>params[:slug]}

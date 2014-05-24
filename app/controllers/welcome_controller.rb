@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
   helper :welcome
   
   def index
-    @files = Cms::File.includes(:categories).for_category("front")
-    @wod = Blog::Blog.where(identifier: "wod").first.posts.first
+    @files = Comfy::Cms::File.includes(:categories).for_category("front")
+    @wod = Comfy::Blog::Blog.where(identifier: "wod").first.posts.first
   end
 end

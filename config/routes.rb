@@ -1,4 +1,5 @@
 Baltbear::Application.routes.draw do
+
   root :to => "welcome#index"
   get "contact", :to=>"contact#index"
   post "contact", :to=>"contact#send_mail"
@@ -20,7 +21,6 @@ Baltbear::Application.routes.draw do
   match "schedule", :to=>"schedule#index", :via=>[:post,:get]
   get "schedule/events.js", :to=>"schedule#events", :via=>[:get]
   
-  ComfyGallery::Routing.admin
   comfy_route :blog_admin, :path => '/cms-admin'
   comfy_route :blog, :path => '/blog'
 
