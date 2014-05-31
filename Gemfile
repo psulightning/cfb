@@ -47,7 +47,6 @@ gem 'koala'
 
 gem 'comfortable_mexican_sofa'
 gem 'comfy_blog'
-gem 'tinymce-rails'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
 

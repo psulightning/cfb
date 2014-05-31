@@ -2,6 +2,10 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-class Comfy::Blog::PostsController
-  helper Comfy::Blog::PostsHelper
+module PostsControllerPatch
+  extend ActiveSupport::Concern
+  
+  included do
+    helper PostsHelper
+  end
 end

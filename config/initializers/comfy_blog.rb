@@ -8,3 +8,8 @@ ComfyBlog.configure do |config|
   config.auto_publish_comments = true
   
 end
+Comfy::Admin::Blog::PostsController.send(:include, AdminPostsControllerPatch)
+Comfy::Blog::PostsController.send(:include, PostsControllerPatch)
+Comfy::Blog::CommentsController.send(:include, CommentsControllerPatch)
+Comfy::Blog::Comment.send(:include, CommentPatch)
+Comfy::Blog::Post.send(:include,PostPatch)
