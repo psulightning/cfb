@@ -88,6 +88,9 @@ input[type=text]::-ms-clear {
 .class_container button{
     float: right;
 }
+textarea{
+    color: black;
+}
 input{ color:black}
 button{ color:black}
 @media only screen

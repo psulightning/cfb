@@ -4,9 +4,9 @@
 
 .comments
   - @post.comments.published.each do |comment|
-    = render :partial => 'blog/comments/comment', locals: {comment: comment}
+    = render :partial => 'comfy/blog/comments/comment', locals: {comment: comment}
   %br 
   - if current_user.logged?
-    = render :partial => 'blog/comments/form'
+    = render :partial => 'comfy/blog/comments/form'
   - else
     ="You must be #{link_to("logged in",signin_url)} to comment.".html_safe

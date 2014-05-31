@@ -151,6 +151,48 @@ ActiveRecord::Schema.define(version: 20131116180001) do
     t.datetime "updated_at"
   end
 
+  create_table "old_blog_comments", force: true do |t|
+    t.integer  "post_id",                      null: false
+    t.integer  "author_id",                    null: false
+    t.text     "content"
+    t.boolean  "is_published", default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "old_blog_comments", ["post_id", "created_at"], name: "index_blog_comments_on_post_id_and_created_at", using: :btree
+  add_index "old_blog_comments", ["post_id", "is_published", "created_at"], name: "index_blog_comments_on_post_published_created", using: :btree
+
+  create_table "old_blog_posts", force: true do |t|
+    t.string   "title",                                    null: false
+    t.string   "slug",                                     null: false
+    t.text     "content"
+    t.string   "excerpt",      limit: 1024
+    t.integer  "author_id"
+    t.integer  "year",                                     null: false
+    t.integer  "month",        limit: 2,                   null: false
+    t.boolean  "is_published",              default: true, null: false
+    t.datetime "published_at",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "old_blog_posts", ["created_at"], name: "index_blog_posts_on_created_at", using: :btree
+  add_index "old_blog_posts", ["is_published", "created_at"], name: "index_blog_posts_on_is_published_and_created_at", using: :btree
+  add_index "old_blog_posts", ["is_published", "year", "month", "slug"], name: "index_blog_posts_on_published_year_month_slug", using: :btree
+
+  create_table "old_blogs", force: true do |t|
+    t.integer "site_id",                             null: false
+    t.string  "label",                               null: false
+    t.string  "identifier",                          null: false
+    t.string  "app_layout",  default: "application", null: false
+    t.string  "path"
+    t.text    "description"
+  end
+
+  add_index "old_blogs", ["identifier"], name: "index_blogs_on_identifier", using: :btree
+  add_index "old_blogs", ["site_id", "path"], name: "index_blogs_on_site_id_and_path", using: :btree
+
   create_table "repetitions", force: true do |t|
     t.string "times"
   end
