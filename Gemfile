@@ -21,7 +21,7 @@ gem 'coffee-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'slidesjs-rails'
+gem 'slidesjs-rails', github: 'psulightning/slidesjs-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -38,7 +38,7 @@ group :development do
   gem 'byebug', '~> 2.1.1'
 end
 
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch=>"bootstrap3"
+gem 'twitter-bootstrap-rails', github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3"
 
 
 gem 'exception_notification'
@@ -46,12 +46,9 @@ gem 'koala'
 
 
 gem 'comfortable_mexican_sofa'
-gem 'comfy_blog', path: "lib/plugins/comfy_blog"
-gem 'comfy_gallery', path: "lib/plugins/comfy_gallery"
-gem 'tinymce-rails'
+gem 'comfy_blog'
 
 gem 'bcrypt-ruby', require: 'bcrypt'
 
 gem 'savon'
-gem 'squeel'
-gem 'mindbody-api', path: 'lib/plugins/mindbody-api'
+gem 'mindbody-api', github: 'psulightning/mindbody-api'
