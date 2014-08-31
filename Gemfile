@@ -38,7 +38,7 @@ group :development do
   gem 'byebug', '~> 2.1.1'
 end
 
-gem 'twitter-bootstrap-rails', github: "seyhunak/twitter-bootstrap-rails", branch: "bootstrap3"
+gem 'twitter-bootstrap-rails'
 
 
 gem 'exception_notification'

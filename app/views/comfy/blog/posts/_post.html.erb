@@ -6,7 +6,7 @@
        "#{link_to(post.title, comfy_blog_post_path(@cms_site.path, @blog.path, post.slug))}".html_safe%>
     </span>
     &nbsp;&nbsp;
-    <span class="post_comments"><%="Comments(#{post.comments.length})".html_safe%></span></div>
+    <span class="post_comments"><%="Comments(#{post.comments.length-1})".html_safe%></span></div>
   <br/>
   <div class='post_content'>
     <%= post.content.html_safe %>
