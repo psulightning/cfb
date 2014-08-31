@@ -2,8 +2,8 @@
   <div>
     <span class="post_title">
       <%= @post ? 
-       "#{link_to "#{@blog.label} Posts", blog_posts_path(@cms_site.path, @blog.path)} >> #{@post.title}".html_safe : 
-       "#{link_to(post.title, blog_post_path(@cms_site.path, @blog.path, post.slug))}".html_safe%>
+       "#{link_to "#{@blog.label} Posts", comfy_blog_posts_path(@cms_site.path, @blog.path)} >> #{@post.title}".html_safe : 
+       "#{link_to(post.title, comfy_blog_post_path(@cms_site.path, @blog.path, post.slug))}".html_safe%>
     </span>
     &nbsp;&nbsp;
     <span class="post_comments"><%="Comments(#{post.comments.length})".html_safe%></span></div>
