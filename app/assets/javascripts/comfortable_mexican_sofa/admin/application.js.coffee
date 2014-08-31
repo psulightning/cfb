@@ -1,5 +1,4 @@
-#= require tinymce-jquery
-if window.CMS
+if typeof window.CMS != "undefined"
   window.CMS.wysiwyg = ->
     tinymce.init
         selector: 'textarea[data-cms-rich-text]'

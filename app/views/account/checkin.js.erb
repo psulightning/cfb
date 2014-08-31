@@ -1,7 +1,7 @@
 $("#ident").removeClass("loading");
 <%if @errors%>
-  $("#flash").addClass("alert alert-error");
-  $("#flash").html("<%=@errors.join(", ")%>");
+  $("#flash").addClass("alert alert-danger");
+  $("#flash").html("<%=@errors.join(", ").html_safe%>");
   $("#flash").show();
 <%end%>
 <%if @success%>

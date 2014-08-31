@@ -77,7 +77,8 @@ class AccountController < ApplicationController
   def register_class
     response = @service.add_clients_to_classes({
         "ClientIDs"=>{"string"=>@client.id},
-        "ClassIDs"=>{"int"=>@class_obj.id}})
+        "ClassIDs"=>{"int"=>@class_obj.id},
+        "Test"=>true})
     if (response.status)!="Success"
       error_code = ""
       error_code = response.result[:classes][:clients][:error_code] if !response.result[:classes].nil?
@@ -87,7 +88,7 @@ class AccountController < ApplicationController
       when "603"
         "Already signed into #{@class_obj.start_date_time.strftime("%l:%M %p")}"
       else
-        "#{error_code} - #{[response.message,response.result[:classes][:clients][:message]].join(", ")}"
+        "#{error_code} - #{response.result[:classes][:clients][:messages].gsub(/\n(.*)/,"")}"
       end
       @errors =  [msg]
     else

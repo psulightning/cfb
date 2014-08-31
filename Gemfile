@@ -51,4 +51,4 @@ gem 'comfy_blog'
 gem 'bcrypt-ruby', require: 'bcrypt'
 
 gem 'savon'
-gem 'mindbody-api', github: 'wingrunr21/mindbody-api', branch: 'disable_advanced_typecasting'
+gem 'mindbody-api', github: 'psulightning/mindbody-api'
