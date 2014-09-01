@@ -2,7 +2,6 @@
 # and open the template in the editor.
 
 module AdminPostsHelper
-  unloadable
    def author_field
      hidden_field_tag("post[author_id]", current_user.id)+
      content_tag(:div, :class=>"form_group")do

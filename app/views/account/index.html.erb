@@ -1,18 +1,34 @@
 <div class="login_box">
-  <div style="margin:0 auto;width:35%">
-    <h2>Login</h2>
-    <%= form_tag login_path, :id=>"login_form",:method=>"post" do %>
-      <p><label for="login">Email Address: </label><%=text_field_tag :login%></p>
-      <p><label for="password">Password:</label><%=password_field_tag :password%></p>
+  <div class="col-sm-offset-1"><h2>Login</h2></div>
+  <div style="margin:0 auto;width:60%">
+    <%= form_tag login_path, :id=>"login_form",:class=>"form-horizontal",:method=>"post",:role=>"form" do %>
+      <div class="form-group">
+        <label for="login" class="col-sm-4 control-label">Email Address: </label>
+        <div class="col-sm-7">
+          <%=text_field_tag :login,nil,:class=>"form-control"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="col-sm-4 control-label">Password:</label>
+        <div class="col-sm-7">
+          <%=password_field_tag :password,nil, :class=>"form-control"%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-4 control-label">Remember me? </label>
+        <div class="col-sm-7"> <%=check_box_tag :remember%> </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%=button_tag "Login", :type=>:button, :id=>"login_button"%>
+          &nbsp;&nbsp;&nbsp;
+          <%=button_tag "Register", :type=>:button, :id=>"register_button"%>
+        </div>
+      </div>
     <%end%>
-  </div>
-  <div style="width: 90%;margin: 0 auto">
-    <!--<div class="fb-login-button" style="display:inline-block" data-width="50"></div>-->
-    <div class="login_buttons">
-      <%=button_tag "Login", :type=>:button, :id=>"login_button"%>
-      &nbsp;&nbsp;&nbsp;
-      <%=button_tag "Register", :type=>:button, :id=>"register_button"%>
-    </div>
   </div>
 </div>
 <script type="text/javascript">
@@ -23,10 +39,10 @@
     $("#register_button").click(function() {
       window.location = "<%= register_path%>";
     });
-    $("#password").keypress(function(e){
-      if(e.keyCode===13){
+    $("#password").keypress(function(e) {
+      if (e.keyCode === 13) {
         $("#login_form").submit();
       }
     });
   });
-  </script>
+</script>

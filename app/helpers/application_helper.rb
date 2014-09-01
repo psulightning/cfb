@@ -3,8 +3,8 @@ module ApplicationHelper
     msg=""
     if !flash.keys.empty?
       flash.each{|k,v|
-        klass = k==:error ? :danger : k
-        msg << content_tag(:div,:class=>"alert alert-#{klass}") do
+        klass = k== "error" ? "danger" : k
+        msg << content_tag(:div,:class=>"alert alert-#{klass}",:role=>"alert") do
           str = "<ul>"  
           str << case v
           when String
@@ -23,17 +23,8 @@ module ApplicationHelper
     msg.html_safe
   end
   
-  def current_user=(user_id)
-    session[:current_user]=user_id
-  end
-  
   def current_user
-    begin
-    @current_user ||= session[:current_user] ? User.find(session[:current_user]) : User.new
-    rescue Exception=>e
-      session[:current_user]=nil
-      @current_user ||= session[:current_user] ? User.find(session[:current_user]) : User.new
-    end
+    @current_user ||= cookies[:auth_token] ? User.find_by_auth_token(cookies[:auth_token]) : User.new
   end
 
 end

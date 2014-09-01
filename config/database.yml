@@ -19,3 +19,10 @@ migrate:
   host: localhost
   username: cfb_migrate
   password: e#3O17lw
+  
+test:
+  adapter: mysql2
+  database: cfb_test
+  host: localhost
+  username: root
+  password:  
