@@ -99,7 +99,7 @@ class AccountController < ApplicationController
   
   def find_client
     if params[:ident] && !params[:ident].empty?
-      @client = MindBody::Services::ClientService.get_clients({"string"=>params[:ident]}).result[:clients]
+      @client = MindBody::Services::ClientService.get_clients({"ClientIDs"=>{"string"=>params[:ident]}}).result[:clients]
     end
   end
   
