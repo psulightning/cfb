@@ -42,6 +42,7 @@ group :test do
   gem 'mocha'
   gem 'shoulda'
   gem 'rspec-rails'
+  gem 'byebug', '~> 2.1.1'
 end
 
 gem 'twitter-bootstrap-rails'
