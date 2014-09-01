@@ -4,6 +4,7 @@
     <%= form_tag login_path, :id=>"login_form",:method=>"post" do %>
       <p><label for="login">Email Address: </label><%=text_field_tag :login%></p>
       <p><label for="password">Password:</label><%=password_field_tag :password%></p>
+      <p><label for="remember">Remember Me?</label><%=check_box_tag :remember%></p>
     <%end%>
   </div>
   <div style="width: 90%;margin: 0 auto">
