@@ -1,4 +1,3 @@
-#= require tinymce-jquery
 if window.CMS
   window.CMS.wysiwyg = ->
     tinymce.init
