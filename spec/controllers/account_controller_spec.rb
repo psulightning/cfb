@@ -34,6 +34,48 @@ RSpec.describe AccountController, :type => :controller do
           expect(response).to render_template(:index)
         end
       end
+      describe "with valid user" do
+        describe "without permanent login selected" do
+          before do
+            @user = User.find_by_login("regular@localhost")
+            expect(User).to receive(:try_to_login).with("regular@localhost","password").and_return(@user)
+            post :login, {login: "regular@localhost", password: "password"}
+          end
+        
+          it "should create a session cookie" do
+            expect(cookies[:auth_token]).not_to be_nil
+          end
+          
+          it "should set the cookie to auth_token" do
+            expect(cookies[:auth_token]).to eq @user.auth_token
+          end
+        
+          it "should redirect to profile" do
+            puts cookies.as_json
+            expect(response).to redirect_to(profile_path)
+          end
+        end
+        describe "with permanent login selected" do
+          before do
+            @user = User.find_by_login("regular@localhost")
+            expect(User).to receive(:try_to_login).with("regular@localhost","password").and_return(@user)
+            post :login, {login: "regular@localhost", password: "password", remember: true}
+          end
+        
+          it "should create a cookie" do
+            expect(cookies[:auth_token]).not_to be_nil
+          end
+          
+          it "should set the cookie to auth_token" do
+            expect(cookies[:auth_token]).to eq @user.auth_token
+          end
+        
+          it "should redirect to profile" do
+            puts cookies.as_json
+            expect(response).to redirect_to(profile_path)
+          end
+        end
+      end
     end
   end
 end
