@@ -38,6 +38,12 @@ group :development do
   gem 'byebug', '~> 2.1.1'
 end
 
+group :test do
+  gem 'mocha'
+  gem 'shoulda'
+  gem 'rspec-rails'
+end
+
 gem 'twitter-bootstrap-rails'
 
 
@@ -48,7 +54,7 @@ gem 'koala'
 gem 'comfortable_mexican_sofa'
 gem 'comfy_blog'
 
-gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'bcrypt'
 
 gem 'savon'
 gem 'mindbody-api', github: 'psulightning/mindbody-api'
