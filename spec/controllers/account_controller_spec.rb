@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AccountController, :type => :controller do
+  fixtures :users
   describe "when logging in" do
     describe "with invalid params" do
       describe "with no email address or password" do
@@ -27,10 +28,17 @@ RSpec.describe AccountController, :type => :controller do
     end
     describe "with valid params" do
       describe "with a locked user" do
-        it "should render index" do
+        before do
           user = User.find_by_login("locked@localhost")
           expect(User).to receive(:try_to_login).with("locked@localhost","123abc").and_return(user)
           post :login, {login: "locked@localhost", password: "123abc"}
+        end
+        
+        it "should tell user account is locked via the flash hash" do
+          expect(flash[:error]).to eq "Your account has been locked."
+        end
+        
+        it "should render index" do
           expect(response).to render_template(:index)
         end
       end
@@ -51,7 +59,6 @@ RSpec.describe AccountController, :type => :controller do
           end
         
           it "should redirect to profile" do
-            puts cookies.as_json
             expect(response).to redirect_to(profile_path)
           end
         end
@@ -71,7 +78,6 @@ RSpec.describe AccountController, :type => :controller do
           end
         
           it "should redirect to profile" do
-            puts cookies.as_json
             expect(response).to redirect_to(profile_path)
           end
         end
