@@ -4,7 +4,6 @@
 module AdminPostsHelper
   unloadable
    def author_field
-     byebug
      hidden_field_tag("post[author_id]", current_user.id)+
      content_tag(:div, :class=>"form_group")do
        content_tag(:label, "Author", :class=>"control-label col-sm-2")+
