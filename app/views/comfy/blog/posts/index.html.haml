@@ -2,4 +2,4 @@
 
 - @posts.each do |post|
   = render :partial => post
-= paginate @posts, :params=>{:controller=>"blog/posts",:action=>"serve",:comfy_blog_path=>params[:slug]}
+= paginate @posts, :params=>{:controller=>"blog/posts",:action=>"serve",:blog_path=>params[:slug]}
