@@ -24,7 +24,12 @@ module ApplicationHelper
   end
   
   def current_user
-    @current_user ||= cookies[:auth_token] ? User.find_by_auth_token(cookies[:auth_token]) : User.new
+    @current_user ||= if cookies[:auth_token]
+      token = LoginToken.find_by_token(cookies[:auth_token])
+      token ? token.user : User.new
+    else
+       User.new
+    end
   end
 
 end

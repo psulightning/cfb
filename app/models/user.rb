@@ -1,9 +1,10 @@
-require "bcrypt"
+
 
 class User < ActiveRecord::Base
   
   has_many :posts, class_name: "Blog::Post", foreign_key: "author_id"
   has_many :comments, class_name: "Blog::Comment", foreign_key: "author_id"
+  has_many :tokens, class_name: "LoginToken"
   
   STATUS_ANON = 0
   STATUS_LOCKED = 1
@@ -73,10 +74,8 @@ class User < ActiveRecord::Base
     now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
   end
   
-  def generate_token(column)
-    begin
-      self[column] = SecureRandom.urlsafe_base64
-    end while User.exists?(column => self[column])
+  def generate_token
+   SecureRandom.urlsafe_base64
   end
 end
 

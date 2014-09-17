@@ -15,13 +15,13 @@ class AccountController < ApplicationController
       flash[:error]="Your account has been locked."
       render :action=>"index"
     else
-      user.assign_attributes({last_login: Time.now})
-      user.generate_token(:auth_token)
-      user.save!
+      user.update_attributes({last_login: Time.now})
+      lt = LoginToken.create!(:user=>user,:permanent=>!params[:remember].nil?)
+      
       if params[:remember]
-        cookies.permanent[:auth_token]=user.auth_token
+        cookies.permanent[:auth_token]=lt.token
       else
-        cookies[:auth_token]=user.auth_token
+        cookies[:auth_token]=lt.token
       end
       redirect_to profile_path
     end
