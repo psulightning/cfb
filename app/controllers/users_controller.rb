@@ -25,9 +25,9 @@ class UsersController < ApplicationController
       @user.assign_attributes(user_params)
       @user.permission=User::STATUS_MEMBER
       @user.password,@user.password_confirmation=params[:user][:password],params[:user][:confirm]
-      @user.generate_token(:auth_token)
       if @user.save
-        cookies[:auth_token]=@user.auth_token
+        lt = LoginToken.create!(:user=>@user,:permanent=>false)
+        cookies[:auth_token]=lt.token
         @user.update_column(:last_login, Time.now)
         @user.update_column(:updated_at, Time.now)
         redirect_to profile_path
