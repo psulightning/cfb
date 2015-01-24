@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe AccountController, :type => :controller do
-  fixtures :users
   describe "when logging in" do
     describe "with invalid params" do
       describe "with no email address or password" do
@@ -29,9 +28,9 @@ RSpec.describe AccountController, :type => :controller do
     describe "with valid params" do
       describe "with a locked user" do
         before do
-          user = User.find_by_login("locked@localhost")
-          expect(User).to receive(:try_to_login).with("locked@localhost","123abc").and_return(user)
-          post :login, {login: "locked@localhost", password: "123abc"}
+          @user = create(:user, :locked)
+          expect(User).to receive(:try_to_login).and_return(@user)
+          post :login, {login: @user.login, password: @user.password}
         end
         
         it "should tell user account is locked via the flash hash" do
@@ -45,9 +44,9 @@ RSpec.describe AccountController, :type => :controller do
       describe "with valid user" do
         describe "without permanent login selected" do
           before do
-            @user = User.find_by_login("regular@localhost")
-            expect(User).to receive(:try_to_login).with("regular@localhost","password").and_return(@user)
-            post :login, {login: "regular@localhost", password: "password"}
+            @user = create(:user)
+            expect(User).to receive(:try_to_login).and_return(@user)
+            post :login, {login: @user.login, password: @user.password}
           end
         
           it "should create a session cookie" do
@@ -55,7 +54,7 @@ RSpec.describe AccountController, :type => :controller do
           end
           
           it "should set the cookie to auth_token" do
-            expect(cookies[:auth_token]).to eq @user.auth_token
+            expect(cookies[:auth_token]).to eq @user.token.token
           end
         
           it "should redirect to profile" do
@@ -64,9 +63,9 @@ RSpec.describe AccountController, :type => :controller do
         end
         describe "with permanent login selected" do
           before do
-            @user = User.find_by_login("regular@localhost")
-            expect(User).to receive(:try_to_login).with("regular@localhost","password").and_return(@user)
-            post :login, {login: "regular@localhost", password: "password", remember: true}
+            @user = create(:user)
+            expect(User).to receive(:try_to_login).and_return(@user)
+            post :login, {login: @user.login, password: @user.password, remember: true}
           end
         
           it "should create a cookie" do
@@ -74,7 +73,7 @@ RSpec.describe AccountController, :type => :controller do
           end
           
           it "should set the cookie to auth_token" do
-            expect(cookies[:auth_token]).to eq @user.auth_token
+            expect(cookies[:auth_token]).to eq @user.token.token
           end
         
           it "should redirect to profile" do

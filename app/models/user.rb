@@ -1,10 +1,8 @@
-
-
 class User < ActiveRecord::Base
   
   has_many :posts, class_name: "Blog::Post", foreign_key: "author_id"
   has_many :comments, class_name: "Blog::Comment", foreign_key: "author_id"
-  has_many :tokens, class_name: "LoginToken"
+  has_one :token, class_name: "LoginToken"
   
   STATUS_ANON = 0
   STATUS_LOCKED = 1
@@ -18,9 +16,9 @@ class User < ActiveRecord::Base
   validates :password, :confirmation=>true, :presence=>true
   validates :login, :uniqueness=>true, :presence=>true
   
-  def initialize
-    super
-    self.permission=STATUS_ANON
+  def initialize(params={})
+    super(params)
+    self.permission=STATUS_ANON unless params[:permission].present?
     return self
   end
   
