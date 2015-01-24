@@ -61,4 +61,21 @@ RSpec.describe User, :type => :model do
       end
     end
   end
+  
+  context "try_to_login" do
+    before do
+      @user = create(:user, :login=>"abc123@foo.bar", :password=>"barbell")
+    end
+    describe "with existing member" do
+      it "should return the user" do
+        expect(User.try_to_login("abc123@foo.bar", "barbell")).to eq @user
+      end
+    end
+    
+    describe "with bad creds" do
+      it "should return nil" do
+        expect(User.try_to_login("def456@bar.foo","bellbar")).to eq nil
+      end
+    end
+  end
 end
