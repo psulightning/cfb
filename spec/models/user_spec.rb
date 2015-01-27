@@ -78,4 +78,11 @@ RSpec.describe User, :type => :model do
       end
     end
   end
+  
+  context "age" do
+    it "should return proper age for user" do
+      user = create(:user, :birthday=>"1990-01-01")
+      expect(user.age).to eq 25
+    end
+  end
 end

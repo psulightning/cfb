@@ -6,6 +6,8 @@ FactoryGirl.define do
     
     password SecureRandom.base64
     permission 2
+    birthday "1984-08-24".to_date
+    
     trait :admin do
       permission 4
     end
