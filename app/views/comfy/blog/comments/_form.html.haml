@@ -1,4 +1,4 @@
-= form_for @comment, :as => :comment, :url => comfy_blog_comments_path(@cms_site.path, @blog.path, @post.slug) do |form|
+= comfy_form_for @comment, :as => :comment, :url => comfy_blog_comments_path(@cms_site.path, @blog.path, @post.slug) do |form|
   
   = form.hidden_field :author_id, :value=> current_user.id
   %label New Comment
