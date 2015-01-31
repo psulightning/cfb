@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-class LoginTokenTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+RSpec.describe LoginToken, :type => :model do
+  
 end
