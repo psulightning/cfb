@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '4.1.8'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
@@ -34,7 +34,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
+group :development, :test do
   gem 'byebug', '~> 2.1.1'
 end
 
@@ -42,7 +42,6 @@ group :test do
   gem 'mocha'
   gem 'shoulda'
   gem 'rspec-rails'
-  gem 'byebug', '~> 2.1.1'
 end
 
 gem 'twitter-bootstrap-rails'
@@ -52,8 +51,8 @@ gem 'exception_notification'
 gem 'koala'
 
 
-gem 'comfortable_mexican_sofa'
-gem 'comfy_blog'
+gem 'comfortable_mexican_sofa', '1.12.2'
+gem 'comfy_blog', '1.12.0'
 
 gem 'bcrypt'
 
