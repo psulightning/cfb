@@ -91,13 +91,41 @@
         <%end%>
       <% end %>
     <%end%>
-    <div id="main" class="<%=content_for?(:sidebar) ? '' : 'nosidebar'%>">
+    <div id="main">
+      <div id="l_sidebar">
+        <div style="padding-top: 5%; padding-bottom: 5%; width: 70%; text-align:center; margin: 0 auto; color: whitesmoke">Sign up, Get 1st class free</div>
+        <table class="icons">
+          <tbody>
+            <tr>
+              <td><a href="https://www.facebook.com/pages/CrossFit-Baltimore/634102939996107" title="Facebook"><%= image_tag "FB_Icon.svg"%></a></td>
+              <td><a href="http://instagram.com/crossfitbaltimore/" title="Instagram"><%= image_tag "Instagram_Icon.svg"%></a></td>
+              <td><a href="https://twitter.com/cfbaltimore"><%= image_tag "Twitter_Icon.svg"%></a></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cfj">
+          <a href="http://journal.crossfit.com/start.tpl?version=CFJ-white123x63"
+             target="_blank"
+             title="CrossFit Journal: The Performance-Based Lifestyle Resource">
+            <img src="http://journal.crossfit.com/templates/images/white-125x63.png"
+                 width="125px"
+                 height="63px"
+                 alt="CrossFit Journal: The Performance-Based Lifestyle Resource" />
+          </a>
+        </div>
+      </div>
       <div id="content">
         <%= show_flash_messages %>
         <%= yield %>
       </div>
-      <div id="sidebar">
-        <%= yield :sidebar %>
+      <div id="r_sidebar">
+          <h1 style="margin-top: 0px; color: whitesmoke">Events</h1>
+          <!-- div for events -->
+          <div style="padding-bottom: 5%; height: 200px"></div>
+          
+          <h1 style="color:whitesmoke">Athlete of the Month</h1>
+          <!-- dive for athlete -->
+          <div style="height: 200px"></div>
       </div>
     </div>
     <div class='footer'>
