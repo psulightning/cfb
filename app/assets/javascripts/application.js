@@ -18,3 +18,4 @@
 //= require jquery-ui
 //= require turbolinks
 //= require_tree .
+//= require multi_level_navbar

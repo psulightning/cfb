@@ -11,83 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514233923) do
-
-  create_table "carousel_carousels", force: true do |t|
-    t.string   "label",      null: false
-    t.string   "identifier", null: false
-    t.string   "dimensions"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "carousel_carousels", ["identifier"], name: "index_carousel_carousels_on_identifier", using: :btree
-
-  create_table "carousel_slides", force: true do |t|
-    t.integer  "carousel_id",                   null: false
-    t.string   "label",                         null: false
-    t.text     "content"
-    t.string   "url"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.integer  "position",          default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "carousel_slides", ["carousel_id", "position"], name: "index_carousel_slides_on_carousel_id_and_position", using: :btree
-
-  create_table "cms_dynamic_view_versions", force: true do |t|
-    t.integer  "original_record_id"
-    t.integer  "version"
-    t.string   "type"
-    t.string   "name"
-    t.string   "format"
-    t.string   "handler"
-    t.text     "body"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.boolean  "published",          default: false
-    t.boolean  "deleted",            default: false
-    t.boolean  "archived",           default: false
-    t.string   "version_comment"
-    t.integer  "created_by_id"
-    t.integer  "updated_by_id"
-  end
-
-  create_table "cms_dynamic_views", force: true do |t|
-    t.integer  "version"
-    t.integer  "lock_version",  default: 0
-    t.string   "type"
-    t.string   "name"
-    t.string   "format"
-    t.string   "handler"
-    t.text     "body"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "published",     default: false
-    t.boolean  "deleted",       default: false
-    t.boolean  "archived",      default: false
-    t.integer  "created_by_id"
-    t.integer  "updated_by_id"
-  end
-
-  create_table "cms_users", force: true do |t|
-    t.string   "login",                     limit: 40
-    t.string   "first_name",                limit: 40
-    t.string   "last_name",                 limit: 40
-    t.string   "email",                     limit: 40
-    t.string   "crypted_password",          limit: 40
-    t.string   "salt",                      limit: 40
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "expires_at"
-    t.string   "remember_token",            limit: 40
-    t.datetime "remember_token_expires_at"
-  end
-
-  add_index "cms_users", ["login"], name: "index_cms_users_on_login", unique: true, using: :btree
+ActiveRecord::Schema.define(version: 20140917212702) do
 
   create_table "comfy_blog_comments", force: true do |t|
     t.integer  "post_id",                      null: false
@@ -119,22 +43,6 @@ ActiveRecord::Schema.define(version: 20140514233923) do
   add_index "comfy_blog_posts", ["created_at"], name: "index_comfy_blog_posts_on_created_at", using: :btree
   add_index "comfy_blog_posts", ["is_published", "created_at"], name: "index_comfy_blog_posts_on_is_published_and_created_at", using: :btree
   add_index "comfy_blog_posts", ["is_published", "year", "month", "slug"], name: "index_blog_posts_on_published_year_month_slug", using: :btree
-
-  create_table "comfy_blog_taggings", force: true do |t|
-    t.integer "post_id", null: false
-    t.integer "tag_id",  null: false
-  end
-
-  add_index "comfy_blog_taggings", ["post_id", "tag_id"], name: "index_blog_taggings_on_post_tag", unique: true, using: :btree
-
-  create_table "comfy_blog_tags", force: true do |t|
-    t.string  "name",                           null: false
-    t.boolean "is_category",    default: false, null: false
-    t.integer "taggings_count", default: 0,     null: false
-  end
-
-  add_index "comfy_blog_tags", ["name", "taggings_count"], name: "index_comfy_blog_tags_on_name_and_taggings_count", unique: true, using: :btree
-  add_index "comfy_blog_tags", ["taggings_count"], name: "index_comfy_blog_tags_on_taggings_count", using: :btree
 
   create_table "comfy_blogs", force: true do |t|
     t.integer "site_id",                             null: false
@@ -313,47 +221,19 @@ ActiveRecord::Schema.define(version: 20140514233923) do
     t.datetime "updated_at"
   end
 
-  create_table "old_blog_comments", force: true do |t|
-    t.integer  "post_id",                      null: false
-    t.integer  "author_id",                    null: false
-    t.text     "content"
-    t.boolean  "is_published", default: false, null: false
+  create_table "login_tokens", force: true do |t|
+    t.integer  "user_id",       null: false
+    t.string   "token"
+    t.boolean  "permanent"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_accessed"
   end
 
-  add_index "old_blog_comments", ["post_id", "created_at"], name: "index_blog_comments_on_post_id_and_created_at", using: :btree
-  add_index "old_blog_comments", ["post_id", "is_published", "created_at"], name: "index_blog_comments_on_post_published_created", using: :btree
-
-  create_table "old_blog_posts", force: true do |t|
-    t.string   "title",                                    null: false
-    t.string   "slug",                                     null: false
-    t.text     "content"
-    t.string   "excerpt",      limit: 1024
-    t.integer  "author_id"
-    t.integer  "year",                                     null: false
-    t.integer  "month",        limit: 2,                   null: false
-    t.boolean  "is_published",              default: true, null: false
-    t.datetime "published_at",                             null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "old_blog_posts", ["created_at"], name: "index_blog_posts_on_created_at", using: :btree
-  add_index "old_blog_posts", ["is_published", "created_at"], name: "index_blog_posts_on_is_published_and_created_at", using: :btree
-  add_index "old_blog_posts", ["is_published", "year", "month", "slug"], name: "index_blog_posts_on_published_year_month_slug", using: :btree
-
-  create_table "old_blogs", force: true do |t|
-    t.integer "site_id",                             null: false
-    t.string  "label",                               null: false
-    t.string  "identifier",                          null: false
-    t.string  "app_layout",  default: "application", null: false
-    t.string  "path"
-    t.text    "description"
-  end
-
-  add_index "old_blogs", ["identifier"], name: "index_blogs_on_identifier", using: :btree
-  add_index "old_blogs", ["site_id", "path"], name: "index_blogs_on_site_id_and_path", using: :btree
+  add_index "login_tokens", ["last_accessed"], name: "index_login_tokens_on_last_accessed", using: :btree
+  add_index "login_tokens", ["permanent"], name: "index_login_tokens_on_permanent", using: :btree
+  add_index "login_tokens", ["token"], name: "index_login_tokens_on_token", using: :btree
+  add_index "login_tokens", ["user_id"], name: "index_login_tokens_on_user_id", using: :btree
 
   create_table "repetitions", force: true do |t|
     t.string "times"
