@@ -6,7 +6,9 @@ class WelcomeController < ApplicationController
   helper :welcome
   
   def index
+    @announcements = Comfy::Cms::Page.find_by_slug("announcements")
     @files = Comfy::Cms::File.includes(:categories).for_category("front")
-    @wod = Comfy::Blog::Blog.where(identifier: "wod").first.posts.first
+    wod_blog = Comfy::Blog::Blog.find_by_identifier("wod")
+    @wod = wod_blog.present? ? wod_blog.posts.first : nil
   end
 end
