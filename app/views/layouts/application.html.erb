@@ -67,15 +67,9 @@
         <%end%>
       <%end%>
       <%= menu_group do %>
-      <%= drop_down "Competitions" do %>
-          <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Crossfit Open</a>
-            <ul class="dropdown-menu">
-              <%= menu_item "2015 Season", comfy_cms_render_page_url("competitions/open/2015-season") %>
-            </ul>
-          </li>
-          <%= menu_item "Gemini Games", "#" %>
-        </ul>
-      <%end%>
+        <%= drop_down "Crossfit Open" do %>
+          <%= menu_item "2015 Season", comfy_cms_render_page_url("open/2015-season") %>
+        <%end%>
       <%end%>
       <%if current_user.admin?%>
         <%= menu_group do %>

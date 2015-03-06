@@ -18,6 +18,9 @@
         }
       }
     });
+    <% if @announcements.is_published? %>
+    $("#main").prepend("<%= escape_javascript content_tag(:div, cms_block_content(:content, @announcements).html_safe, :class=>"announcements")%>");
+    <% end %>
   });
 </script>
 
