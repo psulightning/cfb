@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
-  has_many :posts, class_name: "Blog::Post", foreign_key: "author_id"
-  has_many :comments, class_name: "Blog::Comment", foreign_key: "author_id"
+  has_many :posts, class_name: "Comfy::Blog::Post", foreign_key: "author_id"
+  has_many :comments, class_name: "Comfy::Blog::Comment", foreign_key: "author_id"
   has_one :token, class_name: "LoginToken"
   
   STATUS_ANON = 0
@@ -13,8 +13,11 @@ class User < ActiveRecord::Base
   #before_save :change_password
   before_create :salt_password
   
-  validates :password, :confirmation=>true, :presence=>true
+  validates :password, :confirmation=>true
+  validates :password_confirmation, :presence=>true
   validates :login, :uniqueness=>true, :presence=>true
+  validates :first, :presence=> {:message=>"name can't be blank"}
+  validates :last, :presence=> {:message=>"name can't be blank"}
   
   def initialize(params={})
     super(params)
