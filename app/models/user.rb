@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
   validates :password, :confirmation=>true, :presence=>true
   validates :login, :uniqueness=>true, :presence=>true
   
-  def initialize
-    super
-    self.permission=STATUS_ANON
+  def initialize(attrs={})
+    super(attrs)
+    self.permission=STATUS_ANON if self.permission.nil?
     return self
   end
   

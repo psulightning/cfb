@@ -231,6 +231,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    seedbank (0.3.0)
     sexp_processor (4.4.5)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
@@ -299,6 +300,7 @@ DEPENDENCIES
   sass-rails
   savon
   sdoc
+  seedbank
   shoulda
   slidesjs-rails!
   timecop

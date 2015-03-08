@@ -36,6 +36,7 @@ end
 
 group :development, :test do
   gem 'byebug', '~> 2.1.1'
+  gem 'seedbank'
 end
 
 group :test do
