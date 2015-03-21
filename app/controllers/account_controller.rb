@@ -46,9 +46,9 @@ class AccountController < ApplicationController
     begin
       @service = MindBody::Services::ClassService.new
       if @client && !@class_obj
-        time = Time.now
+        time = Time.parse("2015-03-21T09:30:00")#Time.now
 
-        response = @service.get_classes({"StartDateTime"=>Date.today,"EndDateTime"=>Date.today})
+        response = @service.get_classes({"StartDateTime"=>"2015-03-21".to_date,"EndDateTime"=>"2015-03-21".to_date, "HideCanceledClasses"=>true})
         if (response.status)!="Success" || response.result_count == "0"
           @errors = [response.message]
         elsif response.result[:classes].nil?

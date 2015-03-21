@@ -20,7 +20,7 @@ class ScheduleController < ApplicationController
     service = MindBody::Services::ClassService.new
     dates = {"StartDateTime"=>min.to_date,
       "EndDateTime"=>max.to_date}
-    response = service.get_classes(dates)
+    response = service.get_classes(dates.merge("HideCanceledClasses"=>true))
     classes = response.result[:classes]
     @class_list = []
     classes.each{|c|
