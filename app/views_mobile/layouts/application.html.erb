@@ -55,18 +55,13 @@
         <%= drop_down "Blogs" do %>
           <%= menu_item "Events", comfy_blog_posts_path("", "events") %>
           <%= menu_item "WOD Archive", comfy_blog_posts_path("","wod") %>
-          <%#= menu_item "Exercise Demos", "/exercises" %>
         <%end%>
       <%end%>
-      <%#= menu_group do %>
-        <%#= drop_down "Nutrition" do %>
-          <%#= menu_item "Paleo Lifestyle", "/nutrition/paleo"%>
-          <%#= menu_item "Nutrition Blog", comfy_blog_posts_path("","nutrition") %>
-        <%#end%>
-      <%#end%>
-      <%#= menu_group do
-        menu_item "Store", "/store"
-      end%>
+      <%= menu_group do %>
+        <%= drop_down "Crossfit Open" do %>
+          <%= menu_item "2015 Season", comfy_cms_render_page_url("open/2015-season") %>
+        <%end%>
+      <%end%>
       <%= menu_group do
         menu_item "Contact Us", "/contact"
       end%>

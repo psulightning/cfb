@@ -1,3 +1,6 @@
+<% if @announcements.is_published? %>
+<%= content_tag(:div, cms_block_content(:content, @announcements).html_safe, :class=>"announcements")%>
+<%end%>
 <%if @wod%>
   <div style="text-align: center">
     <div class="wod_box">
