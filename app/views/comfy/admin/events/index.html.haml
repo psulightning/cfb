@@ -1,0 +1,25 @@
+.page-header
+  = link_to 'New Event', new_comfy_admin_event_path, :class => 'btn btn-default pull-right'
+  %h2= 'Events'
+
+= paginate @events, :theme => 'comfy'
+
+%table.table.table-hover.table-bordered
+  %tr
+    %th.main Title
+    %th Event Date
+    %th Description
+    %th Location
+    %th
+  - @events.each do |event|
+    %tr
+      %td= event.title
+      %td= event.event_date
+      %td.main= event.description.html_safe
+      %td= event.location
+      %td
+        .btn-group.btn-group-sm
+          = link_to 'Edit', edit_comfy_admin_event_path(event), :class => 'btn btn-default'
+          = link_to 'Delete', comfy_admin_event_path(event), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger'
+
+= paginate @events, :theme => 'comfy'

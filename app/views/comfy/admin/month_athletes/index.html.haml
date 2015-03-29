@@ -1,0 +1,27 @@
+.page-header
+  = link_to 'New Athlete', new_comfy_admin_athlete_path, :class => 'btn btn-default pull-right'
+  %h2= 'Athletes of the Month'
+
+= paginate @athletes, :theme => 'comfy'
+
+%table.table.table-hover.table-bordered
+  %tr
+    %th.main Name
+    %th Month
+    %th Year
+    %th Picture
+    %th Description
+    %th
+  - @athletes.each do |athlete|
+    %tr
+      %td= athlete.name
+      %td= athlete.month
+      %td= athlete.year
+      %td.icon{:style=>"background: url('#{athlete.picture.file.url(:cms_thumb)}') no-repeat center"}
+      %td.main= athlete.description.html_safe
+      %td
+        .btn-group.btn-group-sm
+          = link_to 'Edit', edit_comfy_admin_athlete_path(athlete), :class => 'btn btn-default'
+          = link_to 'Delete', comfy_admin_athlete_path(athlete), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger'
+
+= paginate @athletes, :theme => 'comfy'

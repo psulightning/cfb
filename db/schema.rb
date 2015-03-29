@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917212702) do
+ActiveRecord::Schema.define(version: 20150329172200) do
 
   create_table "comfy_blog_comments", force: true do |t|
     t.integer  "post_id",                      null: false
@@ -175,6 +175,18 @@ ActiveRecord::Schema.define(version: 20140917212702) do
   add_index "comfy_cms_snippets", ["site_id", "identifier"], name: "index_comfy_cms_snippets_on_site_id_and_identifier", unique: true, using: :btree
   add_index "comfy_cms_snippets", ["site_id", "position"], name: "index_comfy_cms_snippets_on_site_id_and_position", using: :btree
 
+  create_table "events", force: true do |t|
+    t.string   "title"
+    t.date     "event_date"
+    t.text     "description"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["description"], name: "fulltext_index_events_description", type: :fulltext
+  add_index "events", ["event_date"], name: "index_events_on_event_date", using: :btree
+
   create_table "exercises", force: true do |t|
     t.string   "name"
     t.string   "type"
@@ -234,6 +246,16 @@ ActiveRecord::Schema.define(version: 20140917212702) do
   add_index "login_tokens", ["permanent"], name: "index_login_tokens_on_permanent", using: :btree
   add_index "login_tokens", ["token"], name: "index_login_tokens_on_token", using: :btree
   add_index "login_tokens", ["user_id"], name: "index_login_tokens_on_user_id", using: :btree
+
+  create_table "month_athletes", force: true do |t|
+    t.string   "name"
+    t.integer  "month"
+    t.integer  "year"
+    t.integer  "picture_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "repetitions", force: true do |t|
     t.string "times"

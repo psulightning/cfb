@@ -1,6 +1,6 @@
 development:
   adapter: mysql2
-  database: baltbear
+  database: cfb
   host: localhost
   username: root
   password: 

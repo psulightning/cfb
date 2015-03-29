@@ -1,0 +1,5 @@
+.page-header
+  %h2 New Athlete of the Month
+
+= comfy_form_for [:comfy_admin, @athlete], :url=>comfy_admin_athletes_path, :as=>:athlete do |form|
+  = render form
