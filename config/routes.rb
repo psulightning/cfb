@@ -20,10 +20,12 @@ Baltbear::Application.routes.draw do
   match "schedule", :to=>"schedule#index", :via=>[:post,:get]
   get "schedule/events.js", :to=>"schedule#events", :via=>[:get]
   
+  comfy_route :event_admin, :path => '/cms-admin'
+  comfy_route :event, :path => "/events"
+  
   comfy_route :blog_admin, :path => '/cms-admin'
   comfy_route :blog, :path => '/blog'
-
+  
   comfy_route :cms_admin, :path => '/cms-admin'
   comfy_route :cms, :path => '/', :sitemap => false
-
 end

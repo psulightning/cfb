@@ -1,0 +1,7 @@
+<h1>CFB Events</h1>
+
+<%@events.each do |event|%>
+<h3><%=link_to "#{event.event_date} - #{event.title}", comfy_event_path(event)%></h3>
+<p><%=cleanup_description(event.description)%></p>
+<%end%>
+<%=paginate @events%>

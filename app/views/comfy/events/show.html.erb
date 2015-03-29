@@ -1,0 +1,13 @@
+<div class='post'>
+  <div>
+    <span class="post_title">
+      <%="#{link_to "Events", comfy_events_path} >> #{@event.event_date} - #{@event.title}".html_safe%>
+    </span>
+  </div>
+  <div class="post_content">
+    <%=@event.description.html_safe%>
+    <% if @event.location.present? %>
+      Location: <%= @event.location %>
+    <%end%>
+  </div>
+</div>

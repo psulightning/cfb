@@ -42,6 +42,9 @@ group :test do
   gem 'mocha'
   gem 'shoulda'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'vcr'
+  gem 'timecop'
 end
 
 gem 'twitter-bootstrap-rails'
