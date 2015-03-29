@@ -1,4 +1,8 @@
 Baltbear::Application.routes.draw do
+  namespace :admin do
+    resources :month_athletes
+  end
+
   root :to => "welcome#index"
   get "contact", :to=>"contact#index"
   post "contact", :to=>"contact#send_mail"
@@ -22,6 +26,9 @@ Baltbear::Application.routes.draw do
   
   comfy_route :event_admin, :path => '/cms-admin'
   comfy_route :event, :path => "/events"
+  
+  comfy_route :month_athlete_admin, :path => '/cms-admin'
+  comfy_route :month_athlete, :path => "/aotm"
   
   comfy_route :blog_admin, :path => '/cms-admin'
   comfy_route :blog, :path => '/blog'

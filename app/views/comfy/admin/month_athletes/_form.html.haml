@@ -1,0 +1,11 @@
+= form.text_field :name
+= form.select :month, options_for_month_select
+= form.select :year, (2015..2020).to_a
+= form.file_field :picture
+- unless @athlete.new_record?
+  = form.form_group t('.current_file') do
+    .file-image= image_tag @athlete.picture.file.url(:cms_thumb) 
+= form.text_area :description, :rows=>15, :data => {'cms-rich-text' => true}
+
+= form.form_group :class => 'form-actions' do
+  = form.submit "#{@athlete.new_record? ? "Create" : "Update"} Athlete", :class => 'btn btn-primary'

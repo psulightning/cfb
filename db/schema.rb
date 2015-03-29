@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328223022) do
+ActiveRecord::Schema.define(version: 20150329172200) do
 
   create_table "comfy_blog_comments", force: true do |t|
     t.integer  "post_id",                      null: false
@@ -246,6 +246,16 @@ ActiveRecord::Schema.define(version: 20150328223022) do
   add_index "login_tokens", ["permanent"], name: "index_login_tokens_on_permanent", using: :btree
   add_index "login_tokens", ["token"], name: "index_login_tokens_on_token", using: :btree
   add_index "login_tokens", ["user_id"], name: "index_login_tokens_on_user_id", using: :btree
+
+  create_table "month_athletes", force: true do |t|
+    t.string   "name"
+    t.integer  "month"
+    t.integer  "year"
+    t.integer  "picture_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "repetitions", force: true do |t|
     t.string "times"
