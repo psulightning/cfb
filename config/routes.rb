@@ -1,8 +1,4 @@
 Baltbear::Application.routes.draw do
-  namespace :admin do
-    resources :month_athletes
-  end
-
   root :to => "welcome#index"
   get "contact", :to=>"contact#index"
   post "contact", :to=>"contact#send_mail"
