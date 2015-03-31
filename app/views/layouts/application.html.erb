@@ -51,6 +51,8 @@
           <%= menu_item "Location", "/about" %>
           <%= menu_item "What is CrossFit?", "/about#crossfit" %>
           <%= menu_item "Coaches", "/about#coaches" %>
+          <%= menu_item "Events", comfy_events_path %>
+          <%= menu_item "Athlete of the Month", comfy_aotms_path %>
         <%end%>
       <%end%>
       <%= menu_group do%>
@@ -62,7 +64,6 @@
       <%end%>
       <%= menu_group do %>
         <%= drop_down "Blogs" do %>
-          <%= menu_item "Events", comfy_blog_posts_path("", "events") %>
           <%= menu_item "WOD Archive", comfy_blog_posts_path("","wod") %>
         <%end%>
       <%end%>
@@ -130,18 +131,18 @@
           </div>
 
 
-
+          <% if @aotm %>
           <!-- div for athlete -->
           <div style="color: whitesmoke">
             <h2 style="color:whitesmoke">Athlete of the Month</h2>
-            <% if @aotm %>
+            
               <%= image_tag @aotm.picture.file.url, :size=>"150x150", :style=>"display:block;margin-left:auto; margin-right: auto" %><br/>
               <div style="text-align:center">
                 <h3><%= "#{Date::MONTHNAMES[@aotm.month]} #{@aotm.year}" %></h3>
                 <h3><%= link_to @aotm.name, comfy_aotm_path(@aotm) %></h3>
               </div>
-            <% end %>
           </div>
+          <% end %>
         </div>
       </div>
     </div>
