@@ -62,3 +62,5 @@ gem 'bcrypt'
 
 gem 'savon'
 gem 'mindbody-api', github: 'psulightning/mindbody-api'
+
+gem 'dalli'

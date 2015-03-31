@@ -119,8 +119,9 @@ and (min-width: 481px){
     }
 
     #content{
-        width:50%;
         display: inline-block;
+        border-right: 2px #84955b solid;
+        border-left: 2px #84955b solid;
     }
 
     .footer{
@@ -139,8 +140,6 @@ and (min-width: 481px){
     }
 
     #l_sidebar{
-        float:left;
-        width: 25%;
         display: inline-block;
     }
     
@@ -151,8 +150,6 @@ and (min-width: 481px){
     }
 
     #r_sidebar{
-        float:right;
-        width: 25%;
         z-index: 9;
         display: inline-block
     }
@@ -270,6 +267,7 @@ and (min-width: 481px){
         text-align: center;
         font-size: 50px;
         line-height: 45px;
+        padding-bottom: 1%
     }
 
     .wod_box #wod_post{
@@ -277,7 +275,8 @@ and (min-width: 481px){
         color: #97b557;
         font-family: "Arial Narrow";
         font-size:25px;
-        line-height:22px
+        line-height:22px;
+        padding-bottom: 3%;
     }
 
     #map{

@@ -96,6 +96,7 @@ GEM
       tinymce-rails (>= 4.0.0)
     comfy_blog (1.12.0)
       comfortable_mexican_sofa (~> 1.12.0)
+    dalli (2.7.4)
     debugger-linecache (1.2.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -286,6 +287,7 @@ DEPENDENCIES
   coffee-rails
   comfortable_mexican_sofa (= 1.12.2)
   comfy_blog (= 1.12.0)
+  dalli
   exception_notification
   factory_girl_rails
   jbuilder (~> 1.2)

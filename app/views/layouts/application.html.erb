@@ -91,41 +91,58 @@
         <%end%>
       <% end %>
     <%end%>
-    <div id="main">
-      <div id="l_sidebar">
-        <div style="padding-top: 5%; padding-bottom: 5%; width: 70%; text-align:center; margin: 0 auto; color: whitesmoke">Sign up, Get 1st class free</div>
-        <table class="icons">
-          <tbody>
-            <tr>
-              <td><a href="https://www.facebook.com/pages/CrossFit-Baltimore/634102939996107" title="Facebook"><%= image_tag "FB_Icon.svg"%></a></td>
-              <td><a href="http://instagram.com/crossfitbaltimore/" title="Instagram"><%= image_tag "Instagram_Icon.svg"%></a></td>
-              <td><a href="https://twitter.com/cfbaltimore"><%= image_tag "Twitter_Icon.svg"%></a></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="cfj">
-          <a href="http://journal.crossfit.com/start.tpl?version=CFJ-white123x63"
-             target="_blank"
-             title="CrossFit Journal: The Performance-Based Lifestyle Resource">
-            <img src="http://journal.crossfit.com/templates/images/white-125x63.png"
-                 width="125px"
-                 height="63px"
-                 alt="CrossFit Journal: The Performance-Based Lifestyle Resource" />
-          </a>
+    <div id="main" class="container-fluid">
+      <div class="row">
+        <div id="l_sidebar" class="col-xs-10 col-md-3">
+          <div style="padding-top: 5%; padding-bottom: 5%; width: 70%; text-align:center; margin: 0 auto; color: whitesmoke">Sign up, Get 1st class free</div>
+          <table class="icons">
+            <tbody>
+              <tr>
+                <td><a href="https://www.facebook.com/pages/CrossFit-Baltimore/634102939996107" title="Facebook"><%= image_tag "FB_Icon.svg"%></a></td>
+                <td><a href="http://instagram.com/crossfitbaltimore/" title="Instagram"><%= image_tag "Instagram_Icon.svg"%></a></td>
+                <td><a href="https://twitter.com/cfbaltimore"><%= image_tag "Twitter_Icon.svg"%></a></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="cfj">
+            <a href="http://journal.crossfit.com/start.tpl?version=CFJ-white123x63"
+               target="_blank"
+               title="CrossFit Journal: The Performance-Based Lifestyle Resource">
+              <img src="http://journal.crossfit.com/templates/images/white-125x63.png"
+                   width="125px"
+                   height="63px"
+                   alt="CrossFit Journal: The Performance-Based Lifestyle Resource" />
+            </a>
+          </div>
         </div>
-      </div>
-      <div id="content">
-        <%= show_flash_messages %>
-        <%= yield %>
-      </div>
-      <div id="r_sidebar">
-          <h1 style="margin-top: 0px; color: whitesmoke">Events</h1>
+        <div id="content" class="col-xs-2 col-md-6">
+          <%= show_flash_messages %>
+          <%= yield %>
+        </div>
+        <div id="r_sidebar" class="col-xs-10 col-md-3">
+          <% right_sidebar %>
+          <h2 style="margin-top: 0px; color: whitesmoke">Upcoming Events</h2>
           <!-- div for events -->
-          <div style="padding-bottom: 5%; height: 200px"></div>
-          
-          <h1 style="color:whitesmoke">Athlete of the Month</h1>
-          <!-- dive for athlete -->
-          <div style="height: 200px"></div>
+          <div style="padding-bottom: 5%;">
+            <%@events.each do |e|%>
+              <%=link_to "#{e.event_date} - #{e.title}", comfy_event_path(e)%><br/>
+            <%end%>
+          </div>
+
+
+
+          <!-- div for athlete -->
+          <div style="color: whitesmoke">
+            <h2 style="color:whitesmoke">Athlete of the Month</h2>
+            <% if @aotm %>
+              <%= image_tag @aotm.picture.file.url, :size=>"150x150", :style=>"display:block;margin-left:auto; margin-right: auto" %><br/>
+              <div style="text-align:center">
+                <h3><%= "#{Date::MONTHNAMES[@aotm.month]} #{@aotm.year}" %></h3>
+                <h3><%= link_to @aotm.name, comfy_aotm_path(@aotm) %></h3>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <div class='footer'>

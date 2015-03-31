@@ -21,5 +21,7 @@ module Baltbear
     # config.i18n.default_locale = :de
     config.time_zone = 'Eastern Time (US & Canada)'
     config.autoload_paths << Rails.root.join('lib')
+    
+    config.cache_store = :dalli_store
   end
 end
