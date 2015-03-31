@@ -1,0 +1,7 @@
+<h1>CFB Athletes of the Month</h1>
+
+<%@athletes.each do |athlete|%>
+<h3><%=link_to "#{Date::MONTHNAMES[athlete.month]} #{athlete.year} - #{athlete.name}", comfy_aotm_path(athlete)%></h3>
+<p><%=cleanup_description(athlete.description)%></p>
+<%end%>
+<%=paginate @athletes%>

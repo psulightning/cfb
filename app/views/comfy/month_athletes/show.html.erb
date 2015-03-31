@@ -1,0 +1,11 @@
+<div class='post'>
+  <div>
+    <span class="post_title">
+      <%="#{link_to "Athletes", comfy_aotms_path} >> #{Date::MONTHNAMES[@athlete.month]} #{@athlete.year} - #{@athlete.name}".html_safe%>
+    </span>
+  </div>
+  <div class="post_content">
+    <%= image_tag @athlete.picture.file.url, :size=>"150x150", :style=>"display: block; margin-left:auto; margin-right: auto" %><br/>
+    <%=@athlete.description.html_safe%>
+  </div>
+</div>

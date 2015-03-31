@@ -35,4 +35,16 @@ module ApplicationHelper
   def options_for_month_select
     [["Jan", 1],["Feb", 2],["Mar", 3],["Apr", 4],["May", 5],["Jun", 6],["July", 7],["Aug", 8],["Sep", 9],["Oct", 10],["Nov", 11],["Dec", 12]]
   end
+  
+  def right_sidebar
+    @aotm = MonthAthlete.get_latest
+    @events = Event.get_latest
+  end
+  
+  def cleanup_description(str)
+    str = strip_tags(str)
+    str.gsub!("&amp;", "&")
+    str.gsub!("&nbsp;", "")
+    truncate(str, length: 75)
+  end
 end

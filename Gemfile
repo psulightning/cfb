@@ -36,6 +36,7 @@ end
 
 group :development, :test do
   gem 'byebug', '~> 2.1.1'
+  gem 'seedbank'
 end
 
 group :test do
@@ -61,3 +62,5 @@ gem 'bcrypt'
 
 gem 'savon'
 gem 'mindbody-api', github: 'psulightning/mindbody-api'
+
+gem 'dalli'

@@ -1,7 +1,5 @@
 class Comfy::EventsController < ApplicationController
   
-  helper :events
-  
   def index
     @events = Event.descend_date
     
