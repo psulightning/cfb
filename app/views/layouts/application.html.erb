@@ -12,6 +12,25 @@
             $(this).attr("novalidate", "novalidate");
           });
         }
+        $(".navbar").affix({offset: {top: 200}});
+      });
+      var root = $("html,body");
+      $('ul.dropdown-menu a').click(function() {
+        var hash = this.hash;
+        if (hash !== "") {
+          root.animate({
+            scrollTop: $(hash).offset().top - 80
+          }, 500, function() {
+            window.location.hash = hash;
+          });
+        }
+        else {
+          if (window.location.pathname === this.pathname)
+            root.animate({
+              scrollTop: $("#content").offset().top - 80
+            }, 500);
+        }
+        $(".navbar .container .nav-collapse").collapse('hide');
       });
     </script>
     <meta name="description"
@@ -23,16 +42,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id))
-          return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=454609657964653";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
     <div class="header">
       <div style="text-align: center">
         <div style="margin: 0 auto; width: 50%; height: 10%">
@@ -62,10 +71,11 @@
           <%= menu_item "Schedule/Fees", "/start#schedule" %>
         <%end%>
       <%end%>
+     
       <%= menu_group do %>
-        <%= drop_down "Blogs" do %>
-          <%= menu_item "WOD Archive", comfy_blog_posts_path("","wod") %>
-        <%end%>
+        <%= menu_item "WOD Archive", comfy_blog_posts_path("","wod") %>
+        <%#= drop_down "Blogs" do %>
+        <%#end%>
       <%end%>
       <%= menu_group do %>
         <%= drop_down "Crossfit Open" do %>
@@ -151,29 +161,6 @@
       Address: Pulaski Hwy & 68th St., Baltimore, MD 21237 <br/>
       Phone: 410-866-1713 Email: <a href="mailto:staff@cfbaltimore.com">staff@cfbaltimore.com</a>
     </div>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $(".navbar").affix({offset: {top: 200}});
-      });
-      var root = $("html,body");
-      $('ul.dropdown-menu a').click(function() {
-        var hash = this.hash;
-        if (hash !== "") {
-          root.animate({
-            scrollTop: $(hash).offset().top - 80
-          }, 500, function() {
-            window.location.hash = hash;
-          });
-        }
-        else {
-          if (window.location.pathname === this.pathname)
-            root.animate({
-              scrollTop: $("#content").offset().top - 80
-            }, 500);
-        }
-        $(".navbar .container .nav-collapse").collapse('hide');
-      });
-    </script>
     <div id='schedule_dialog'></div>
     <div id="ajax_loading">Loading...</div>
   </body>

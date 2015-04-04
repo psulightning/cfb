@@ -1,19 +1,21 @@
 <% if @announcements.is_published? %>
 <%= content_tag(:div, cms_block_content(:content, @announcements).html_safe, :class=>"announcements")%>
 <%end%>
-<%if @wods%>
-  <div style="text-align: center">
-    <div class="wod_box">
-      <div id="workout">Workout
-      </div>
-      <div id="otd">
-        <div id="ot">of the Day</div>
-      </div>
-      <div id="wod_post">
-        <%= @wods.first.title %>
-        <br/>
-        <%= simple_format(@wods.first.content.html_safe) %>
-      </div>
+<%if @wod%>
+  <div class="wod_box">
+    <div id="workout">Workout
+    </div>
+    <div id="otd">
+      <div id="ot">of the Day</div>
+    </div>
+    <div class="wod_post">
+      <span class="post_title">
+      <%="#{link_to(@wod.title, comfy_blog_post_path(@wod.blog.site.path, @wod.blog.path, @wod.slug))}".html_safe%>
+      </span>
+      <br/>
+      <span class="post_content">
+        <%=@wod.content.html_safe%>
+      </span>
     </div>
   </div>
 <%end%>

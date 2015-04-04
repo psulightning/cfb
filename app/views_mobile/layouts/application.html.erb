@@ -13,16 +13,6 @@
     </script>
   </head>
   <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id))
-          return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=454609657964653";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
     <%= nav_bar(:responsive=>true) do%>
       <%= menu_group do%>
         <%= menu_item "Home", root_path %>
@@ -42,6 +32,8 @@
           <%= menu_item "Location", "/about" %>
           <%= menu_item "What is CrossFit?", "/about#crossfit" %>
           <%= menu_item "Coaches", "/about#coaches" %>
+          <%= menu_item "Events", comfy_events_path %>
+          <%= menu_item "Athlete of the Month", comfy_aotms_path %>
         <%end%>
       <%end%>
       <%= menu_group do%>
@@ -52,10 +44,10 @@
         <%end%>
       <%end%>
       <%= menu_group do %>
-        <%= drop_down "Blogs" do %>
-          <%= menu_item "Events", comfy_blog_posts_path("", "events") %>
-          <%= menu_item "WOD Archive", comfy_blog_posts_path("","wod") %>
-        <%end%>
+        <%= menu_item "WOD Archive", comfy_blog_posts_path("","wod") %>
+        <%#= drop_down "Blogs" do %>
+          <%#= menu_item "Events", comfy_blog_posts_path("", "events") %>
+        <%#end%>
       <%end%>
       <%= menu_group do %>
         <%= drop_down "Crossfit Open" do %>

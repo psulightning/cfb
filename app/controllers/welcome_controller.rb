@@ -7,8 +7,7 @@ class WelcomeController < ApplicationController
   
   def index
     @announcements = Comfy::Cms::Page.find_by_slug("announcements")
-    @files = Comfy::Cms::File.includes(:categories).for_category("front")
-    wod_blog = Comfy::Blog::Blog.find_by_identifier("wod")
-    @wods =  wod_blog.posts.where(["published_at<=?",Time.now.utc]).first(4)
+    @blog = Comfy::Blog::Blog.find_by_identifier("wod")
+    @wod =  @blog.posts.where(["published_at<=?",Time.now.utc]).first
   end
 end

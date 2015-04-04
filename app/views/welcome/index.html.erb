@@ -11,10 +11,15 @@
     <div id="workout">
       Workout of the day
     </div>
-    <% @wods.each do |w| %>
-      <div id="wod_post">
-        <%=w.title%> <br/>
-        <%=w.content.html_safe %>
+    <% if @wod %>
+      <div class="post">
+        <span class="post_title">
+          <%="#{link_to(@wod.title, comfy_blog_post_path(@wod.blog.site.path, @wod.blog.path, @wod.slug))}".html_safe%>
+        </span>
+        <br/>
+        <div class='post_content'>
+          <%=@wod.content.html_safe %>
+        </div>
       </div>
     <% end %>
   </div>
