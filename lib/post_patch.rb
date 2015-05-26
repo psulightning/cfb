@@ -3,11 +3,10 @@ module PostPatch
   
   included do
     belongs_to :author, class_name: 'User'
-    validate :author_id, presence: true
+    validates :author_id, presence: true
     
     scope :published, -> {
       where(['published_at<=?',Time.now]).where(:is_published=>true)
     }
   end
 end
-

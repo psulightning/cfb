@@ -1,6 +1,6 @@
 module PostsControllerPatch
   extend ActiveSupport::Concern
-  
+
   included do
     helper PostsHelper
     remove_method :show

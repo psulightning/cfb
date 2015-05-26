@@ -46,7 +46,6 @@ class AccountController < ApplicationController
     begin
       @service = MindBody::Services::ClassService.new
       if @client && !@class_obj
-        debugger
         time = Time.now
 
         response = @service.get_classes({"StartDateTime"=>Date.today,"EndDateTime"=>Date.today, "HideCanceledClasses"=>true})
