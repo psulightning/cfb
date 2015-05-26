@@ -1,5 +1,3 @@
-
-
 class User < ActiveRecord::Base
   
   has_many :posts, class_name: "Blog::Post", foreign_key: "author_id"
