@@ -7,7 +7,7 @@ class MonthAthlete < ActiveRecord::Base
     result = Rails.cache.read(:aotm)
     if result.nil?
       result = MonthAthlete.where(:month=>Date.today.month, :year=>Date.today.year).first
-      Rails.cache.write(:aotm, result, :expires_in=>5.minutes.from_now)
+      Rails.cache.write(:aotm, result, :expires_in=>300)
     end
     result
   end
