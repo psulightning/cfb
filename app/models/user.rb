@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   
   def change_password
     if self.password
-      salt_password(self.password)
+      salt_password
     end
   end
   
