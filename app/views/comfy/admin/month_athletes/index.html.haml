@@ -17,7 +17,7 @@
       %td= athlete.name
       %td= athlete.month
       %td= athlete.year
-      %td.icon{:style=>"background: url('#{athlete.picture.file.url(:cms_thumb)}') no-repeat center"}
+      %td.icon{:style=>"background: url('#{athlete.picture.file.url(:cms_thumb) if athlete.picture}') no-repeat center"}
       %td.main= athlete.description.html_safe
       %td
         .btn-group.btn-group-sm
