@@ -55,8 +55,8 @@ gem 'exception_notification'
 gem 'koala'
 
 
-gem 'comfortable_mexican_sofa', '1.12.2'
-gem 'comfy_blog', '1.12.0'
+gem 'comfortable_mexican_sofa', '~>1.12.2'
+gem 'comfy_blog', '~>1.12.0'
 
 gem 'bcrypt'
 
