@@ -102,6 +102,11 @@ button{ color:black}
 .row{
   overflow: hidden; 
 }
+
+.post_content img{
+  max-width: 100%;
+}
+
 @media only screen
 and (min-width: 481px){
   .navbar{
