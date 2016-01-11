@@ -29,6 +29,18 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'twitter-bootstrap-rails'
+gem 'exception_notification'
+gem 'koala'
+gem 'comfortable_mexican_sofa', '~>1.12.2'
+gem 'comfy_blog', '~>1.12.0'
+gem 'bcrypt'
+gem 'savon'
+gem 'mindbody-api', github: 'psulightning/mindbody-api'
+gem 'dalli'
+gem 'kaminari'
+gem 'aws-sdk'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -47,21 +59,3 @@ group :test do
   gem 'vcr'
   gem 'timecop'
 end
-
-gem 'twitter-bootstrap-rails'
-
-
-gem 'exception_notification'
-gem 'koala'
-
-
-gem 'comfortable_mexican_sofa', '~>1.12.2'
-gem 'comfy_blog', '~>1.12.0'
-
-gem 'bcrypt'
-
-gem 'savon'
-gem 'mindbody-api', github: 'psulightning/mindbody-api'
-
-gem 'dalli'
-gem 'kaminari'
