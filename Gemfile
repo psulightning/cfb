@@ -39,7 +39,7 @@ gem 'savon'
 gem 'mindbody-api', github: 'psulightning/mindbody-api'
 gem 'dalli'
 gem 'kaminari'
-gem 'aws-sdk'
+gem 'aws-sdk', '<2.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
