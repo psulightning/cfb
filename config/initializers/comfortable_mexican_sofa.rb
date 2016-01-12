@@ -36,7 +36,7 @@ ComfortableMexicanSofa.configure do |config|
   elsif Rails.env.production?
     {:bucket => "cfb-prod"}
   end
-  config.upload_file_options = {:url => '/system/:class/:id/:attachment/:style/:filename', :s3_credentials => "#{Rails.root}/config/s3.yml"}.merge(s3_options)
+  config.upload_file_options = {:storage=> :s3, :s3_credentials => "#{Rails.root}/config/s3.yml"}.merge(s3_options)
 
   # Sofa allows you to setup entire site from files. Database is updated with each
   # request (if necessary). Please note that database entries are destroyed if there's
