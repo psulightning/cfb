@@ -1,14 +1,14 @@
 GIT
-  remote: git://github.com/psulightning/mindbody-api.git
-  revision: 58871c7e3d77bc90977c6b1e2c76b4dbe7a379a9
+  remote: https://github.com/psulightning/mindbody-api.git
+  revision: b5a2e0b28ab0f66a2bde531ed9278c564a6adc14
   specs:
     mindbody-api (1.0.0.alpha)
       activesupport (>= 3.2.11)
-      savon (~> 2.3.0)
+      savon (~> 2.11.0)
       virtus (~> 1.0.0)
 
 GIT
-  remote: git://github.com/psulightning/slidesjs-rails.git
+  remote: https://github.com/psulightning/slidesjs-rails.git
   revision: 75b8641b05e001f273633141618418ca3b4327e0
   specs:
     slidesjs-rails (0.0.3)
@@ -46,7 +46,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    akami (1.2.2)
+    akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
     arel (5.0.1.20140414130214)
@@ -109,7 +109,7 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
-    equalizer (0.0.9)
+    equalizer (0.0.11)
     erubis (2.7.0)
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
@@ -122,7 +122,7 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    gyoku (1.1.1)
+    gyoku (1.3.1)
       builder (>= 2.1.2)
     haml (4.0.6)
       tilt
@@ -137,9 +137,8 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
-    httpi (2.1.1)
+    httpi (2.4.1)
       rack
-      rubyntlm (~> 0.3.2)
     i18n (0.7.0)
     ice_nine (0.11.1)
     jbuilder (1.5.3)
@@ -173,7 +172,7 @@ GEM
     mysql2 (0.3.17)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    nori (2.3.0)
+    nori (2.6.0)
     paperclip (4.3.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -224,7 +223,6 @@ GEM
     rspec-support (3.1.2)
     ruby_parser (3.7.0)
       sexp_processor (~> 4.1)
-    rubyntlm (0.3.4)
     sass (3.4.14)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -232,14 +230,14 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    savon (2.3.3)
-      akami (~> 1.2.0)
+    savon (2.11.1)
+      akami (~> 1.2)
       builder (>= 2.1.2)
-      gyoku (~> 1.1.0)
-      httpi (~> 2.1.0)
+      gyoku (~> 1.2)
+      httpi (~> 2.3)
       nokogiri (>= 1.4.0)
-      nori (~> 2.3.0)
-      wasabi (~> 3.2.2)
+      nori (~> 2.4)
+      wasabi (~> 3.4)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -274,15 +272,14 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     vcr (2.9.3)
-    virtus (1.0.4)
+    virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
-    wasabi (3.2.3)
+    wasabi (3.5.0)
       httpi (~> 2.0)
-      mime-types (< 2.0.0)
-      nokogiri (>= 1.4.0)
+      nokogiri (>= 1.4.2)
 
 PLATFORMS
   ruby
@@ -308,7 +305,6 @@ DEPENDENCIES
   rails (~> 4.1.11)
   rspec-rails
   sass-rails
-  savon
   sdoc
   seedbank
   shoulda

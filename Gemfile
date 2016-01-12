@@ -21,7 +21,7 @@ gem 'coffee-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'slidesjs-rails', github: 'psulightning/slidesjs-rails'
+gem 'slidesjs-rails', git: 'https://github.com/psulightning/slidesjs-rails.git'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -35,8 +35,7 @@ gem 'koala'
 gem 'comfortable_mexican_sofa', '~>1.12.2'
 gem 'comfy_blog', '~>1.12.0'
 gem 'bcrypt'
-gem 'savon'
-gem 'mindbody-api', github: 'psulightning/mindbody-api'
+gem 'mindbody-api', git: "https://github.com/psulightning/mindbody-api.git"
 gem 'dalli'
 gem 'kaminari'
 gem 'aws-sdk', '<2.0'
