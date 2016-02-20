@@ -55,6 +55,7 @@
       <%= menu_group do%>
         <%= menu_item "Home", root_path %>
       <%end%>
+
       <%= menu_group do%>
         <%= drop_down "About CFB" do %>
           <%= menu_item "Location", "/about" %>
@@ -64,6 +65,7 @@
           <%= menu_item "Athlete of the Month", comfy_aotms_path %>
         <%end%>
       <%end%>
+
       <%= menu_group do%>
         <%= drop_down "Start Here" do%>
           <%= menu_item "Get Started", "/start" %>
@@ -71,17 +73,15 @@
           <%= menu_item "Schedule/Fees", "/start#schedule" %>
         <%end%>
       <%end%>
-     
+
       <%= menu_group do %>
         <%= menu_item "WODs", comfy_blog_posts_path("","wod") %>
-        <%#= drop_down "Blogs" do %>
-        <%#end%>
       <%end%>
+
       <%= menu_group do %>
-        <%= drop_down "Crossfit Open" do %>
-          <%= menu_item "2015 Season", comfy_cms_render_page_url("open/2015-season") %>
-        <%end%>
+        <%= menu_item "Crossfit Open", comfy_cms_render_page_url("open")%>
       <%end%>
+
       <%if current_user.admin?%>
         <%= menu_group do %>
           <%= drop_down "Admin" do %>
@@ -149,7 +149,7 @@
           <!-- div for athlete -->
           <div style="color: whitesmoke">
             <h2 style="color:whitesmoke">Athlete of the Month</h2>
-            
+
               <%= image_tag @aotm.picture.file.url, :style=>"display:block;margin-left:auto; margin-right: auto;max-width:50%" %><br/>
               <div style="text-align:center">
                 <h3><%= "#{Date::MONTHNAMES[@aotm.month]} #{@aotm.year}" %></h3>
