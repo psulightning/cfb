@@ -13,6 +13,7 @@
     </script>
   </head>
   <body>
+    <% prepare_menu_bar %>
     <%= nav_bar(:responsive=>true) do%>
       <%= menu_group do%>
         <%= menu_item "Home", root_path %>
@@ -27,33 +28,36 @@
           <%= menu_item "Login/Register", signin_path %>
         <%end%>
       <% end %>
-      <%= menu_group do%>
-        <%= drop_down "About CFB" do %>
-          <%= menu_item "Location", "/about" %>
-          <%= menu_item "What is CrossFit?", "/about#crossfit" %>
-          <%= menu_item "Coaches", "/about#coaches" %>
-          <%= menu_item "Events", comfy_events_path %>
-          <%= menu_item "Athlete of the Month", comfy_aotms_path %>
-        <%end%>
-      <%end%>
-      <%= menu_group do%>
-        <%= drop_down "Start Here" do%>
-          <%= menu_item "Get Started", "/start" %>
-          <%= menu_item "Fundamentals", "/start#fundamentals"%>
-          <%= menu_item "Schedule/Fees", "/start#schedule" %>
-        <%end%>
-      <%end%>
-      <%= menu_group do %>
-        <%= menu_item "WODs", comfy_blog_posts_path("","wod") %>
-        <%#= drop_down "Blogs" do %>
-          <%#= menu_item "Events", comfy_blog_posts_path("", "events") %>
-        <%#end%>
-      <%end%>
-      <%= menu_group do %>
-        <%= drop_down "Crossfit Open" do %>
-          <%= menu_item "2015 Season", comfy_cms_render_page_url("open/2015-season") %>
-        <%end%>
-      <%end%>
+      <% @pages.each do |p| %>
+        <% case p.slug %>
+        <% when "about" %>
+          <%= menu_group do %>
+            <%= drop_down "About CFB" do %>
+              <%= menu_item "Location", "/about" %>
+              <%= menu_item "What is CrossFit?", "/about#crossfit" %>
+              <%= menu_item "Coaches", "/about#coaches" %>
+              <%= menu_item "Events", comfy_events_path %>
+              <%= menu_item "Athlete of the Month", comfy_aotms_path %>
+            <% end %>
+          <% end %>
+        <% when "start" %>
+          <%= menu_group do %>
+            <%= drop_down "Start Here" do %>
+              <%= menu_item "Get Started", "/start" %>
+              <%= menu_item "Fundamentals", "/start#fundamentals" %>
+              <%= menu_item "Schedule/Fees", "/start#schedule" %>
+            <% end %>
+          <% end %>
+        <% when "open" %>
+          <%= menu_group do %>
+            <%= menu_item "Crossfit Open", comfy_cms_render_page_url("open") %>
+          <% end %>
+        <% else %>
+          <%= menu_group do %>
+            <%= menu_bar_builder(p) %>
+          <% end %>
+        <% end %>
+      <% end %>
       <%= menu_group do
         menu_item "Contact Us", "/contact"
       end%>

@@ -28,7 +28,7 @@ module ApplicationHelper
       token = LoginToken.find_by_token(cookies[:auth_token])
       token ? token.user : User.new
     else
-       User.new
+      User.new
     end
   end
 
@@ -46,5 +46,31 @@ module ApplicationHelper
     str.gsub!("&amp;", "&")
     str.gsub!("&nbsp;", "")
     truncate(str, length: 75)
+  end
+  
+  def prepare_menu_bar
+    @pages = Rails.cache.fetch('menu_bar_pages', :expires_in => 30) do 
+      Comfy::Cms::Page.published.where(:is_menu_bar => true, :parent_id => Comfy::Cms::Page.root.id).where.not(:slug => "announcements") 
+    end
+  end
+  
+  def menu_bar_builder(page)
+    if page.children.present?
+      if page.parent == Comfy::Cms::Page.root
+        drop_down page.label do
+          page.children.collect do |c|
+            menu_bar_builder(c)
+          end.join("").html_safe
+        end
+      else
+        drop_down_submenu page.label do
+          page.children.collect do |c|
+            menu_bar_builder(c)
+          end.join("").html_safe
+        end
+      end
+    else
+      menu_item page.label, comfy_cms_render_page_url(page.url)
+    end
   end
 end

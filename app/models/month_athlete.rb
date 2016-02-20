@@ -4,12 +4,7 @@ class MonthAthlete < ActiveRecord::Base
   after_commit :clear_cache
 
   def self.get_latest
-    result = Rails.cache.read(:aotm)
-    if result.nil?
-      result = MonthAthlete.where(:month=>Date.today.month, :year=>Date.today.year).first
-      Rails.cache.write(:aotm, result, :expires_in=>300)
-    end
-    result
+    result = Rails.cache.fetch(:aotm, :expires_in => 300) { MonthAthlete.where(:month=>Date.today.month, :year=>Date.today.year).first }
   end
   
   private

@@ -51,57 +51,67 @@
             reach new levels of determination and perseverance through physical performance."</i></div>
       </div>
     </div>
+    <% prepare_menu_bar %>
     <%= nav_bar(:responsive=>true) do%>
       <%= menu_group do%>
         <%= menu_item "Home", root_path %>
-      <%end%>
+      <% end %>
 
-      <%= menu_group do%>
-        <%= drop_down "About CFB" do %>
-          <%= menu_item "Location", "/about" %>
-          <%= menu_item "What is CrossFit?", "/about#crossfit" %>
-          <%= menu_item "Coaches", "/about#coaches" %>
-          <%= menu_item "Events", comfy_events_path %>
-          <%= menu_item "Athlete of the Month", comfy_aotms_path %>
-        <%end%>
-      <%end%>
-
-      <%= menu_group do%>
-        <%= drop_down "Start Here" do%>
-          <%= menu_item "Get Started", "/start" %>
-          <%= menu_item "Fundamentals", "/start#fundamentals"%>
-          <%= menu_item "Schedule/Fees", "/start#schedule" %>
-        <%end%>
-      <%end%>
+      <% @pages.each do |p| %>
+        <% case p.slug %>
+        <% when "about" %>
+          <%= menu_group do %>
+            <%= drop_down "About CFB" do %>
+              <%= menu_item "Location", "/about" %>
+              <%= menu_item "What is CrossFit?", "/about#crossfit" %>
+              <%= menu_item "Coaches", "/about#coaches" %>
+              <%= menu_item "Events", comfy_events_path %>
+              <%= menu_item "Athlete of the Month", comfy_aotms_path %>
+            <% end %>
+          <% end %>
+        <% when "start" %>
+          <%= menu_group do %>
+            <%= drop_down "Start Here" do %>
+              <%= menu_item "Get Started", "/start" %>
+              <%= menu_item "Fundamentals", "/start#fundamentals" %>
+              <%= menu_item "Schedule/Fees", "/start#schedule" %>
+            <% end %>
+          <% end %>
+        <% when "open" %>
+          <%= menu_group do %>
+            <%= menu_item "Crossfit Open", comfy_cms_render_page_url("open") %>
+          <% end %>
+        <% else %>
+          <%= menu_group do %>
+            <%= menu_bar_builder(p) %>
+          <% end %>
+        <% end %>
+      <% end %>
 
       <%= menu_group do %>
         <%= menu_item "WODs", comfy_blog_posts_path("","wod") %>
-      <%end%>
+      <% end %>
 
-      <%= menu_group do %>
-        <%= menu_item "Crossfit Open", comfy_cms_render_page_url("open")%>
-      <%end%>
-
-      <%if current_user.admin?%>
+      <% if current_user.admin? %>
         <%= menu_group do %>
           <%= drop_down "Admin" do %>
             <%= menu_item "Content Manager" , comfy_admin_cms_url %>
             <%= menu_item "MindBody",  "https://clients.mindbodyonline.com/ASP/home.asp?studioid=92604" %>
-          <%end%>
-        <%end%>
-      <%end%>
+          <% end %>
+        <% end %>
+      <% end %>
       <%= menu_group(:pull=>"right") do %>
         <%= menu_item "Contact Us", "/contact" %>
-        <%if current_user.logged?%>
+        <% if current_user.logged?%>
           <%= drop_down "#{current_user.first} #{current_user.last}" do%>
             <%= menu_item "My Profile", profile_path %>
             <%= menu_item "Logout", logout_path %>
-          <%end%>
-        <%else%>
+          <% end %>
+        <% else %>
           <%= menu_item "Login/Register", signin_path %>
-        <%end%>
+        <% end %>
       <% end %>
-    <%end%>
+    <% end %>
     <div id="main" class="container-fluid">
       <div class="row">
         <div id="l_sidebar" class="col-xs-10 col-md-3">
@@ -136,26 +146,27 @@
         </div>
         <div id="r_sidebar" class="col-xs-10 col-md-3">
           <% right_sidebar %>
-          <h2 style="margin-top: 0px; color: whitesmoke">Upcoming Events</h2>
-          <!-- div for events -->
-          <div style="padding-bottom: 5%;">
-            <%@events.each do |e|%>
-              <%=link_to "#{e.event_date} - #{e.title}", comfy_event_path(e)%><br/>
-            <%end%>
-          </div>
-
+          <% if @events.present? %>
+            <h2 style="margin-top: 0px; color: whitesmoke">Upcoming Events</h2>
+            <!-- div for events -->
+            <div style="padding-bottom: 5%;">
+              <%@events.each do |e|%>
+                <%=link_to "#{e.event_date} - #{e.title}", comfy_event_path(e)%><br/>
+              <% end %>
+            </div>
+          <% end %>
 
           <% if @aotm %>
-          <!-- div for athlete -->
-          <div style="color: whitesmoke">
-            <h2 style="color:whitesmoke">Athlete of the Month</h2>
+            <!-- div for athlete -->
+            <div style="color: whitesmoke">
+              <h2 style="color:whitesmoke">Athlete of the Month</h2>
 
               <%= image_tag @aotm.picture.file.url, :style=>"display:block;margin-left:auto; margin-right: auto;max-width:50%" %><br/>
               <div style="text-align:center">
                 <h3><%= "#{Date::MONTHNAMES[@aotm.month]} #{@aotm.year}" %></h3>
                 <h3><%= link_to @aotm.name, comfy_aotm_path(@aotm) %></h3>
               </div>
-          </div>
+            </div>
           <% end %>
         </div>
       </div>
